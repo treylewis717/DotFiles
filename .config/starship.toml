@@ -1,0 +1,25 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Make prompt a single line instead of two lines
+[line_break]
+disabled = true
+
+# Disables outputing of command duration time
+[cmd_duration]
+disabled = true
+
+# Shows the username always
+[username]
+show_always = true
+style_user = "blue"
+format = "[$user]($style)"
+
+# Shows the hostname always
+[hostname]
+ssh_only = false
+format = "[@$hostname](white) "
+
+# Disables the package module
+[package]
+disabled = true
