@@ -4,7 +4,8 @@
 
 ### EXPORT
 export TERM="alacritty"
-export EDITOR="nano"
+export EDITOR="nvim"
+export PATH=/home/trey/.local/bin:$PATH
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -49,6 +50,11 @@ alias vim="nvim"
 
 # Git DotFiles
 alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
+alias dfcommit='/home/trey/ShellScripts/dfcommit.sh'
+alias dfpush='dfgit push all'
+
+# Yay
+alias yay="paru"
 
 # grep
 alias grep='grep --color=auto'
@@ -56,13 +62,16 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # pacman and yay
-alias sysupd="yay -Syu --noconfirm" 		  #Update Everything
+alias sysupd="paru -Syu --noconfirm" 		  #Update Everything
 alias sysclean='sudo pacman -Rns $(pacman -Qtdq)' #Remove orphaned packages
 
 # Confirm Changes
 alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
+
+# Clear
+alias clear='clear; neofetch'
 
 # Memey
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
