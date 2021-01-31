@@ -56,6 +56,7 @@ alias find="fd"
 
 # Git DotFiles
 alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
+alias dfadd="dfgit add .config/alacritty/alacritty.yml .config/fish/config.fish .config/nvim/init.vim .config/openbox/* .config/qutebrowser/* .config/vifm/colors/* .config/vifm/vifmrc .config/xmobar/* .config/starship.toml .local/bin/pacupdate .xmonad/xpm .xmonad/xmonad.hs .bashrc"
 alias dfcommit='/home/trey/ShellScripts/dfcommit.sh'
 alias dfpush='dfgit push all'
 
