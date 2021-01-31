@@ -45,8 +45,14 @@ alias ls='exa -al --color=always --group-directories-first'
 # rm
 alias frm="rm -rf"
 
+# cat to bat
+alias cat="bat"
+
 # vim
 alias vim="nvim"
+
+# find
+alias find="fd"
 
 # Git DotFiles
 alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
@@ -57,13 +63,11 @@ alias dfpush='dfgit push all'
 alias yay="paru"
 
 # grep
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias grep='rg --color=auto'
 
 # pacman and yay
 alias sysupd="paru -Syu --noconfirm" 		  #Update Everything
-alias sysclean='sudo pacman -Rns $(pacman -Qtdq)' #Remove orphaned packages
+alias sysclean='sudo paru -Rns $(pacman -Qtdq)' #Remove orphaned packages
 
 # Confirm Changes
 alias cp="cp -i"

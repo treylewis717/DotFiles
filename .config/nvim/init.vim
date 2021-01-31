@@ -9,16 +9,16 @@ filetype off                  " required
     " Vundle itself
     Plugin 'gmarik/Vundle.vim'
 
-    "Lightline
+    " Lightline
     Plugin 'itchyny/lightline.vim'
 
-    "Markdown Preview
+    " Markdown Preview
     Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 
-    "CSS Color Previews
+    " CSS Color Previews
     Plugin 'ap/vim-css-color'
 
-    "Emojis
+    " Emojis
     Plugin 'junegunn/vim-emoji'
 
     call vundle#end()
