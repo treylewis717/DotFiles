@@ -1,7 +1,10 @@
 -- Imports --
 
-  -- XMonad --
+  -- Base --
 import XMonad
+import System.Directory
+import System.IO (hPutStrLn)
+import System.Exit
 import qualified XMonad.StackSet as W
 
   -- Data --
@@ -19,6 +22,7 @@ import System.Exit
   -- Hooks --
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.WorkspaceHistory
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 
   -- Util --
 import XMonad.Util.SpawnOnce
@@ -43,10 +47,13 @@ import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.WindowNavigation
 import qualified XMonad.Layout.ToggleLayouts as T
 
--- Modifier Key --
+-- Key Definitions --
 
-myModMask  :: KeyMask
-myModMask  = mod4Mask
+myModMask :: KeyMask
+myModMask = mod4Mask
+
+altMask :: KeyMask
+altMask = mod1Mask
 
 -- Default Apps --
 
@@ -109,7 +116,7 @@ myFocusedBorderColor = "#ff0000"
                     --       , TS.ts_originY      = 0
                       --     , TS.ts_indent       = 80
                         --   , TS.ts_navigate     = myTreeNavigation
-			  -- }
+                          -- }
 
 --myTreeNavigation = M.fromList
   --  [ ((0, xK_Escape), cancel)
@@ -127,6 +134,11 @@ myFocusedBorderColor = "#ff0000"
   --  , ((0, xK_i),      moveHistForward)
     --]
 
+-- Functions --
+
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+
 -- Key Bindings --
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -135,7 +147,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu --
-    , ((modm .|. shiftMask, xK_d     ), spawn "dmenu_run")
+    , ((modm .|. shiftMask, xK_d     ), spawn "dmenu_run -h 24")
 
     -- launch TS --
     -- , ((modm .|. shiftMask, xK_Tab   ), treeselectAction tsDefaultConfig)
@@ -245,26 +257,26 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
-tall	= renamed [Replace "tall"]
-	  $ windowNavigation
-	  $ limitWindows 12
-	  $ mySpacing 4
-	  $ ResizableTall 1 (3/100) (1/2) []
+tall    = renamed [Replace "tall"]
+          $ windowNavigation
+          $ limitWindows 12
+          $ mySpacing 4
+          $ ResizableTall 1 (3/100) (1/2) []
 monocle = renamed [Replace "monocle"]
-	  $ windowNavigation
-	  $ limitWindows 20 Full
+          $ windowNavigation
+          $ limitWindows 20 Full
 grid    = renamed [Replace "grid"]
-	  $ windowNavigation
-	  $ limitWindows 12
-	  $ mySpacing 4
-	  $ Grid (16/10)
+          $ windowNavigation
+          $ limitWindows 12
+          $ mySpacing 4
+          $ Grid (16/10)
 
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange
-	       $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
-	     where
-	       myDefaultLayout =     tall
-				 ||| noBorders monocle
-				 ||| grid
+             $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
+             where
+               myDefaultLayout =     tall
+                                 ||| noBorders monocle
+                                 ||| grid
 
 -- Window Alterations --
 
@@ -302,27 +314,21 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
-	spawnOnce "nitrogen --restore &"
-	spawnOnce "picom &"
-	spawnOnce "nm-applet &"
+        spawnOnce "nitrogen --restore &"
+        spawnOnce "picom &"
+        spawnOnce "nm-applet &"
+        spawnOnce "blueman-applet &"
+        spawnOnce "volumeicon &"
+        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
 
 
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
 
--- Run xmonad with the settings you specify. No need to modify this.
---
+-- Main --
+main :: IO ()
 main = do
-  xmproc <- spawnPipe "xmobar -x 0 /home/trey/.config/xmobar/xmobarrc"
-  xmonad $ docks defaults
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
+  xmproc0 <- spawnPipe "xmobar -x 0 /home/trey/.config/xmobar/xmobarrc"
+  xmonad $ docks def
+        {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -341,6 +347,17 @@ defaults = def {
         layoutHook         = showWName' myShowWNameTheme $ myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook
-    }
+        startupHook        = myStartupHook,
+        logHook            = myLogHook <+> dynamicLogWithPP xmobarPP
+                                { ppOutput = \x -> hPutStrLn xmproc0 x
+                                , ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]"
+                                , ppVisible = xmobarColor "#98be65" ""
+                                , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
+                                , ppHiddenNoWindows = xmobarColor "#c792ea" ""
+                                , ppTitle = xmobarColor "#b3afc2" "" . shorten 60
+                                , ppSep = "<fc=#666666> <fn=1>|</fn> </fc>"
+                                , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                , ppExtras = [windowCount]
+                                , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                                }
+	}
