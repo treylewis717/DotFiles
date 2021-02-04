@@ -60,14 +60,11 @@ alias dfadd="dfgit add .config/alacritty/alacritty.yml .config/fish/config.fish 
 alias dfcommit='/home/trey/ShellScripts/dfcommit.sh'
 alias dfpush='dfgit push all'
 
-# Yay
-alias yay="paru"
-
 # grep
 alias grep='rg --color=auto'
 
 # pacman and yay
-alias sysupd="paru -Syu --noconfirm" 		  #Update Everything
+alias sysupd="paru -Syu --noconfirm; sysclean" 	#Update Everything
 alias sysclean='sudo paru -Rns $(pacman -Qtdq)' #Remove orphaned packages
 
 # Confirm Changes
