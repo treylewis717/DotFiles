@@ -40,7 +40,7 @@ ex ()
 alias r='su -'
 
 # ls
-alias ls='exa -al --color=always --group-directories-first'
+alias ls='exa -lah --color=always --group-directories-first'
 
 # rm
 alias frm="rm -rf"
@@ -56,14 +56,14 @@ alias find="fd"
 
 # Git DotFiles
 alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
-alias dfadd="dfgit add .config/alacritty/alacritty.yml .config/fish/config.fish .config/nvim/init.vim .config/openbox/* .config/qutebrowser/* .config/vifm/colors/* .config/vifm/vifmrc .config/xmobar/* .config/starship.toml .local/bin/pacupdate .xmonad/xpm .xmonad/xmonad.hs .bashrc"
+alias dfadd="dfgit add .config/alacritty/alacritty.yml .config/fish/config.fish .config/nvim/init.vim .config/openbox/* .config/qutebrowser/* .config/vifm/colors/* .config/vifm/vifmrc .config/xmobar/* .config/starship.toml .local/bin/pacupdate .xmonad/xpm .xmonad/xmonad.hs .bashrc .local/bin/getorphans"
 alias dfcommit='/home/trey/ShellScripts/dfcommit.sh'
 alias dfpush='dfgit push all'
 
 # grep
 alias grep='rg --color=auto'
 
-# pacman and yay
+# pacman and paru
 alias sysupd="paru -Syu --noconfirm; sysclean" 	#Update Everything
 alias sysclean='sudo paru -Rns $(pacman -Qtdq)' #Remove orphaned packages
 

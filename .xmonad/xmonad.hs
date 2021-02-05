@@ -147,13 +147,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu --
-    , ((modm .|. shiftMask, xK_d     ), spawn "dmenu_run -h 24")
+    , ((modm .|. shiftMask, xK_d     ), spawn "dmenu_run -h 24 -fn 'RobotoMono Nerd Font-9'")
+
+    -- launch flameshot --
+    , ((modm .|. shiftMask, xK_p     ), spawn "flameshot gui")
 
     -- launch TS --
     -- , ((modm .|. shiftMask, xK_Tab   ), treeselectAction tsDefaultConfig)
-
-    -- launch gmrun --
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
