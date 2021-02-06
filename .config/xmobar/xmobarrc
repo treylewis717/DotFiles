@@ -22,5 +22,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <action=`xdotool key control+alt+g`><icon=haskell_20.xpm/> </action><fc=#666666>|</fc>%UnsafeStdinReader% }{ <fc=#EC0000><fn=1> </fn> %uname% </fc> <fc=#666666>|</fc> <fc=#00EC00> %cpu% </fc> <fc=#666666>|</fc> <fc=#0000EC> %memory% </fc> <fc=#666666>|</fc> <fc=#C800C8> %wlp7s0% </fc> <fc=#666666>|</fc> <fc=#00CBFF> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#666666>|</fc> %orphanpkgs% <fc=#666666>|</fc> <fc=#EEC800>%date%</fc> <fc=#666666>|</fc> %trayerpad%"
+       , template = " <action=`xdotool key control+alt+g`><icon=haskell_20.xpm/> </action><fc=#666666>|</fc>%UnsafeStdinReader% }{ <fc=#EC0000><fn=1> </fn> %uname% </fc> <fc=#666666>|</fc> <fc=#00EC00> %cpu% </fc> <fc=#666666>|</fc> <fc=#0000EC> %memory% </fc> <fc=#666666>|</fc> <fc=#C800C8> %wlp7s0% </fc> <fc=#666666>|</fc> <fc=#00CBFF> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#666666>|</fc> <fc=#786AE0> <fn=1> </fn> %orphanpkgs% </fc> <fc=#666666>|</fc> <fc=#EEC800>%date%</fc> <fc=#666666>|</fc> %trayerpad%"
        }
