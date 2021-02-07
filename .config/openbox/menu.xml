@@ -2,11 +2,11 @@
 <openbox_menu>
     <menu id="root-menu" label="OpenBox 3">
         <menu id="1" label="Development">
+            <item label="Android Studio"> <action name="Execute">
+                <execute>android-studio</execute>
+            </action> </item>
             <item label="Atom"> <action name="Execute">
                 <execute>env ATOM_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT=false /usr/bin/atom</execute>
-            </action> </item>
-            <item label="CMake"> <action name="Execute">
-                <execute>cmake-gui</execute>
             </action> </item>
             <item label="Eclipse"> <action name="Execute">
                 <execute>/home/trey/eclipse/javascript-2020-12/eclipse/eclipse</execute>
@@ -14,20 +14,26 @@
             <item label="Electron"> <action name="Execute">
                 <execute>electron6</execute>
             </action> </item>
-            <item label="Electron 9"> <action name="Execute">
-                <execute>electron9</execute>
-            </action> </item>
             <item label="GitKraken"> <action name="Execute">
                 <execute>gitkraken</execute>
             </action> </item>
             <item label="Icon Browser"> <action name="Execute">
                 <execute>yad-icon-browser</execute>
             </action> </item>
+            <item label="IntelliJ IDEA Community"> <action name="Execute">
+                <execute>idea-ce</execute>
+            </action> </item>
+            <item label="JetBrains Toolbox"> <action name="Execute">
+                <execute>/home/trey/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox</execute>
+            </action> </item>
             <item label="Notepadqq"> <action name="Execute">
                 <execute>notepadqq</execute>
             </action> </item>
             <item label="Qt Assistant"> <action name="Execute">
                 <execute>assistant</execute>
+            </action> </item>
+            <item label="Qt Creator"> <action name="Execute">
+                <execute>qtcreator</execute>
             </action> </item>
             <item label="Qt Designer"> <action name="Execute">
                 <execute>designer</execute>
@@ -37,6 +43,18 @@
             </action> </item>
             <item label="Qt QDbusViewer"> <action name="Execute">
                 <execute>qdbusviewer</execute>
+            </action> </item>
+            <item label="Qt4 Assistant"> <action name="Execute">
+                <execute>assistant-qt4</execute>
+            </action> </item>
+            <item label="Qt4 Designer"> <action name="Execute">
+                <execute>designer-qt4</execute>
+            </action> </item>
+            <item label="Qt4 Linguist"> <action name="Execute">
+                <execute>linguist-qt4</execute>
+            </action> </item>
+            <item label="Qt4 QDbusViewer"> <action name="Execute">
+                <execute>qdbusviewer-qt4</execute>
             </action> </item>
         </menu>
         <menu id="2" label="Editors">
@@ -54,11 +72,20 @@
             <item label="Among Us"> <action name="Execute">
                 <execute>steam steam://rungameid/945360</execute>
             </action> </item>
+            <item label="Dosbox"> <action name="Execute">
+                <execute>dosbox</execute>
+            </action> </item>
+            <item label="heroic"> <action name="Execute">
+                <execute>heroic</execute>
+            </action> </item>
             <item label="Lutris"> <action name="Execute">
                 <execute>lutris</execute>
             </action> </item>
             <item label="Minecraft Launcher"> <action name="Execute">
                 <execute>minecraft-launcher</execute>
+            </action> </item>
+            <item label="Minigalaxy"> <action name="Execute">
+                <execute>minigalaxy</execute>
             </action> </item>
             <item label="MultiMC"> <action name="Execute">
                 <execute>multimc</execute>
@@ -70,6 +97,12 @@
         <menu id="6" label="Graphics">
             <item label="Blender"> <action name="Execute">
                 <execute>blender</execute>
+            </action> </item>
+            <item label="Flameshot"> <action name="Execute">
+                <execute>flameshot</execute>
+            </action> </item>
+            <item label="Fontmatrix"> <action name="Execute">
+                <execute>fontmatrix</execute>
             </action> </item>
             <item label="GNU Image Manipulation Program"> <action name="Execute">
                 <execute>gimp-2.10</execute>
@@ -100,8 +133,8 @@
             <item label="Kdenlive"> <action name="Execute">
                 <execute>kdenlive</execute>
             </action> </item>
-            <item label="LBRY (0.49.3)"> <action name="Execute">
-                <execute>/home/trey/Applications/LBRY_0.49.3.AppImage</execute>
+            <item label="LBRY"> <action name="Execute">
+                <execute>lbry</execute>
             </action> </item>
             <item label="mpv Media Player"> <action name="Execute">
                 <execute>mpv --player-operation-mode=pseudo-gui</execute>
@@ -114,9 +147,6 @@
             </action> </item>
             <item label="PulseAudio Manager"> <action name="Execute">
                 <execute>paman</execute>
-            </action> </item>
-            <item label="PulseAudio Volume Control"> <action name="Execute">
-                <execute>pavucontrol</execute>
             </action> </item>
             <item label="Qt V4L2 test Utility"> <action name="Execute">
                 <execute>qv4l2</execute>
@@ -162,6 +192,15 @@
             <item label="Irssi"> <action name="Execute">
                 <execute>alacritty -e irssi</execute>
             </action> </item>
+            <item label="KDE Connect"> <action name="Execute">
+                <execute>kdeconnect-app</execute>
+            </action> </item>
+            <item label="KDE Connect Indicator"> <action name="Execute">
+                <execute>kdeconnect-indicator</execute>
+            </action> </item>
+            <item label="KDE Connect SMS"> <action name="Execute">
+                <execute>kdeconnect-sms</execute>
+            </action> </item>
             <item label="LibreWolf"> <action name="Execute">
                 <execute>/usr/lib/librewolf/librewolf</execute>
             </action> </item>
@@ -199,9 +238,6 @@
             <item label="Eclipse IDE for Web and JavaScript Developers - 2020-12"> <action name="Execute">
                 <execute>env GTK_IM_MODULE=ibus /home/trey/eclipse/javascript-2020-12/eclipse/eclipse</execute>
             </action> </item>
-            <item label="NVIDIA X Server Settings"> <action name="Execute">
-                <execute>nvidia-settings</execute>
-            </action> </item>
         </menu>
         <menu id="19" label="Shells">
             <item label="Alacritty"> <action name="Execute">
@@ -212,6 +248,9 @@
             </action> </item>
             <item label="GIT"> <action name="Execute">
                 <execute>alacritty -e git</execute>
+            </action> </item>
+            <item label="gmrun"> <action name="Execute">
+                <execute>gmrun</execute>
             </action> </item>
             <item label="MC"> <action name="Execute">
                 <execute>alacritty -e mc</execute>
@@ -239,6 +278,9 @@
             </action> </item>
             <item label="UXTerm"> <action name="Execute">
                 <execute>uxterm</execute>
+            </action> </item>
+            <item label="Vifm"> <action name="Execute">
+                <execute>alacritty -e vifm</execute>
             </action> </item>
             <item label="Xfce Terminal"> <action name="Execute">
                 <execute>xfce4-terminal</execute>
@@ -271,14 +313,32 @@
                     <item label="Bluetooth Manager"> <action name="Execute">
                         <execute>blueman-manager</execute>
                     </action> </item>
+                    <item label="dconf Editor"> <action name="Execute">
+                        <execute>dconf-editor</execute>
+                    </action> </item>
+                    <item label="Disks"> <action name="Execute">
+                        <execute>gnome-disks</execute>
+                    </action> </item>
+                    <item label="Grub Customizer"> <action name="Execute">
+                        <execute>grub-customizer</execute>
+                    </action> </item>
                     <item label="LightDM GTK+ Greeter settings"> <action name="Execute">
                         <execute>lightdm-gtk-greeter-settings-pkexec</execute>
                     </action> </item>
                     <item label="Privilege granting"> <action name="Execute">
                         <execute>gksu-properties</execute>
                     </action> </item>
+                    <item label="PulseAudio Volume Control"> <action name="Execute">
+                        <execute>pavucontrol</execute>
+                    </action> </item>
                     <item label="Quick System Info"> <action name="Execute">
                         <execute>termite -e "/usr/bin/inxi -F" --hold</execute>
+                    </action> </item>
+                    <item label="System Profiler and Benchmark"> <action name="Execute">
+                        <execute>hardinfo</execute>
+                    </action> </item>
+                    <item label="USB Image Writer"> <action name="Execute">
+                        <execute>mintstick -m iso</execute>
                     </action> </item>
                 </menu>
                 <menu id="35" label="Xfce">
@@ -310,9 +370,6 @@
                 <item label="Conkyzen"> <action name="Execute">
                     <execute>am-conkyzen</execute>
                 </action> </item>
-                <item label="Customize Look and Feel"> <action name="Execute">
-                    <execute>lxappearance</execute>
-                </action> </item>
                 <item label="Default Applications"> <action name="Execute">
                     <execute>xfce4-mime-settings</execute>
                 </action> </item>
@@ -325,8 +382,11 @@
                 <item label="File Manager Settings"> <action name="Execute">
                     <execute>thunar-settings</execute>
                 </action> </item>
-                <item label="Grub Customizer"> <action name="Execute">
-                    <execute>grub-customizer</execute>
+                <item label="GParted"> <action name="Execute">
+                    <execute>gparted</execute>
+                </action> </item>
+                <item label="KDE Connect Settings"> <action name="Execute">
+                    <execute>kdeconnect-settings</execute>
                 </action> </item>
                 <item label="Keyboard"> <action name="Execute">
                     <execute>xfce4-keyboard-settings</execute>
@@ -345,6 +405,9 @@
                 </action> </item>
                 <item label="Notifications"> <action name="Execute">
                     <execute>xfce4-notifyd-config</execute>
+                </action> </item>
+                <item label="NVIDIA X Server Settings"> <action name="Execute">
+                    <execute>nvidia-settings</execute>
                 </action> </item>
                 <item label="Openbox Configuration Manager"> <action name="Execute">
                     <execute>obconf</execute>
@@ -395,12 +458,6 @@
             <item label="Conky Toggle"> <action name="Execute">
                 <execute>conky-toggle</execute>
             </action> </item>
-            <item label="dconf Editor"> <action name="Execute">
-                <execute>dconf-editor</execute>
-            </action> </item>
-            <item label="GParted"> <action name="Execute">
-                <execute>gparted</execute>
-            </action> </item>
             <item label="Hardware Locality lstopo"> <action name="Execute">
                 <execute>lstopo</execute>
             </action> </item>
@@ -428,9 +485,6 @@
             <item label="Software Token (small)"> <action name="Execute">
                 <execute>stoken-gui --small</execute>
             </action> </item>
-            <item label="System Profiler and Benchmark"> <action name="Execute">
-                <execute>hardinfo</execute>
-            </action> </item>
             <item label="Systemd Manager"> <action name="Execute">
                 <execute>systemd-manager-pkexec</execute>
             </action> </item>
@@ -439,6 +493,9 @@
             </action> </item>
             <item label="Tint2"> <action name="Execute">
                 <execute>tint2</execute>
+            </action> </item>
+            <item label="USBImager"> <action name="Execute">
+                <execute>usbimager</execute>
             </action> </item>
             <item label="Virtual Machine Manager"> <action name="Execute">
                 <execute>virt-manager</execute>
@@ -460,17 +517,26 @@
             <item label="Archive Manager"> <action name="Execute">
                 <execute>file-roller</execute>
             </action> </item>
+            <item label="balenaEtcher"> <action name="Execute">
+                <execute>/opt/balenaEtcher/balena-etcher-electron</execute>
+            </action> </item>
+            <item label="balenaEtcher (1.5.115)"> <action name="Execute">
+                <execute>/home/trey/Applications/balenaEtcher-1.5.115-x64_1a42e1ec3ceadf7206335c3be74923c9.AppImage</execute>
+            </action> </item>
             <item label="compton"> <action name="Execute">
                 <execute>compton</execute>
             </action> </item>
-            <item label="Disks"> <action name="Execute">
-                <execute>gnome-disks</execute>
+            <item label="Emby Theater"> <action name="Execute">
+                <execute>emby-theater</execute>
             </action> </item>
             <item label="File Manager"> <action name="Execute">
                 <execute>exo-open --launch FileManager</execute>
             </action> </item>
             <item label="Nextcloud desktop sync client"> <action name="Execute">
                 <execute>/home/trey/Applications/Nextcloud-3.1.1-x86_64_3a3c4f9a7afbc3b92d399917b58de2bf.AppImage</execute>
+            </action> </item>
+            <item label="Nextcloud desktop sync client"> <action name="Execute">
+                <execute>nextcloud</execute>
             </action> </item>
             <item label="picom"> <action name="Execute">
                 <execute>picom</execute>
@@ -482,19 +548,19 @@
                 <execute>xfce4-screenshooter</execute>
             </action> </item>
             <item label="Stacer"> <action name="Execute">
-                <execute>/usr/share/stacer/stacer</execute>
+                <execute>stacer</execute>
             </action> </item>
             <item label="Terminal Emulator"> <action name="Execute">
                 <execute>exo-open --launch TerminalEmulator</execute>
-            </action> </item>
-            <item label="USB Image Writer"> <action name="Execute">
-                <execute>mintstick -m iso</execute>
             </action> </item>
             <item label="USB Stick Formatter"> <action name="Execute">
                 <execute>mintstick -m format</execute>
             </action> </item>
             <item label="Variety"> <action name="Execute">
                 <execute>variety</execute>
+            </action> </item>
+            <item label="Winetricks"> <action name="Execute">
+                <execute>winetricks --gui</execute>
             </action> </item>
         </menu>
         <separator/>

@@ -282,7 +282,6 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
@@ -320,6 +319,7 @@ myStartupHook = do
         spawnOnce "blueman-applet &"
         spawnOnce "volumeicon &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
+        spawnOnce "kdeconnect-indicator"
 
 
 
