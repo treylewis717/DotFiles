@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Checking if user is root
+if [[ ! $USER = "root" ]]
+then
+    echo "User must be root. Use sudo or login as root."
+    exit 0
+fi
+
+echo -e "Input: "
+
+read inf
+inf="$DIR/$inf"
+
+echo -e "Output: "
+
+read of
+
+# Asking user if output is a drive
+echo -e "Is Output a drive [y/n]: "
+
+read drivebool
+
+# Checking user's answer
+if [[ $drivebool == "y" || $drivebool == "Y" || $drivebool == "yes" || $drivebool == "Yes" ]]
+then
+    echo "Output is drive"
+    echo "Unmounting drive as precaution"
+    umount $of
+    echo "Unmount complete"
+    echo "Formatting drive..."
+    mkfs.ext4 $of
+    echo "Formatting Complete"
+    echo "Writing to drive"
+    dd if=$inf of=$of status='progress'
+    echo "Write Complete"
+    echo "Exiting..."
+elif [[ $drivebool == "n" || $drivebool == "N" || $drivebool == "no" || $drivebool == "No" ]]
+then
+    echo "Output is not drive"
+    dd if=$inf of=$of status='progress'
+else
+    echo "Invalid Response"
+    echo "Exiting..."
+    exit 0
+fi

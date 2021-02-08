@@ -45,3 +45,9 @@ filetype off                  " required
 
     " Prevents non-normal modes showing in powerline and below powerline
     set noshowmode
+
+" Text/Tab Stuff
+set expandtab    " Spaces instead of tabs
+set smarttab     " SmartTab
+set shiftwidth=4 " One tab == 4 spaces
+set tabstop=4    " One tab == 4 spaces

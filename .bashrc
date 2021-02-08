@@ -6,6 +6,7 @@
 export TERM="alacritty"
 export EDITOR="nvim"
 export PATH=/home/trey/.local/bin:$PATH
+export LOCALBIN=/home/trey/.local/bin
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -56,8 +57,8 @@ alias find="fd"
 
 # Git DotFiles
 alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
-alias dfadd='dfgit add $(~/ShellScripts/dfadd.sh)'
-alias dfcommit='~/ShellScripts/dfcommit.sh'
+alias dfadd='dfgit add $($LOCALBIN/dfadd)'
+alias dfcommit="$LOCALBIN/dfcommit"
 alias dfpush='dfgit push all'
 
 # grep
@@ -68,9 +69,9 @@ alias sysupd="paru -Syu --noconfirm; sysclean" 	#Update Everything
 alias sysclean='sudo paru -Rns $(pacman -Qtdq)' #Remove orphaned packages
 
 # Confirm Changes
-alias cp="cp -i"
-alias mv='mv -i'
-alias rm='rm -i'
+alias cp="cp -iv"
+alias mv='mv -iv'
+alias rm='rm -iv'
 
 # Clear
 alias clear='clear; neofetch'

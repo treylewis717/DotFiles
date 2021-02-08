@@ -57,8 +57,9 @@ local vmrunner    = "virt-manager"
 local themes = {
 }
 
-local chosen_theme = themes[]
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_beautiful.init(theme_path)
+local chosen_theme = themes[1]
+-- local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_beautiful.init(theme_path)
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
