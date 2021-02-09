@@ -10,11 +10,12 @@ fi
 echo -e "Input: "
 
 read inf
+
 inf="$DIR/$inf"
 
 echo -e "Output: "
 
-read of
+read outf
 
 # Asking user if output is a drive
 echo -e "Is Output a drive [y/n]: "
@@ -26,19 +27,19 @@ if [[ $drivebool == "y" || $drivebool == "Y" || $drivebool == "yes" || $driveboo
 then
     echo "Output is drive"
     echo "Unmounting drive as precaution"
-    umount $of
+    umount $outf
     echo "Unmount complete"
     echo "Formatting drive..."
-    mkfs.ext4 $of
+    mkfs.ext4 $outf
     echo "Formatting Complete"
     echo "Writing to drive"
-    dd if=$inf of=$of status='progress'
+    dd if=$inf of=$outf status='progress'
     echo "Write Complete"
     echo "Exiting..."
 elif [[ $drivebool == "n" || $drivebool == "N" || $drivebool == "no" || $drivebool == "No" ]]
 then
     echo "Output is not drive"
-    dd if=$inf of=$of status='progress'
+    dd if=$inf of=$outf status='progress'
 else
     echo "Invalid Response"
     echo "Exiting..."

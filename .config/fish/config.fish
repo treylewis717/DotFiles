@@ -2,7 +2,8 @@
 set fish_greeting
 set TERM "alacritty"
 set EDITOR "nvim"
-
+set PATH "/home/trey/.local/bin:$PATH"
+set LOCALBIN "/home/trey/.local/bin"
 
 ### ALIASES
 
@@ -10,30 +11,37 @@ set EDITOR "nvim"
 alias r='su -'
 
 # ls
-alias ls='exa -al --color=always --group-directories-first'
+alias ls='exa -lah --color=always --group-directories-first'
 
 # rm
 alias frm="rm -rf"
 
+# cat to bat
+alias cat="bat"
+
 # vim
 alias vim="nvim"
 
+# find
+alias find="fd"
+
 # Git DotFiles
-alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
+alias dfgit='git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
+alias dfadd='dfgit add (bash dfadd)'
+alias dfcommit="$LOCALBIN/dfcommit"
+alias dfpush='dfgit push all'
 
 # grep
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias grep='rg --color=auto'
 
-# pacman and yay
-alias sysupd="yay -Syu --noconfirm" 		  #Update Everything
-alias sysclean='sudo pacman -Rns $(pacman -Qtdq)' #Remove orphaned packages
+# pacman and paru
+alias sysupd="paru -Syu --noconfirm; sysclean" 	#Update Everything
+alias sysclean='sudo paru -Rns (pacman -Qtdq)' #Remove orphaned packages
 
 # Confirm Changes
-alias cp="cp -i"
-alias mv='mv -i'
-alias rm='rm -i'
+alias cp="cp -iv"
+alias mv='mv -iv'
+alias rm='rm -iv'
 
 # Clear
 alias clear='clear; neofetch'

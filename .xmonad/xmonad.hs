@@ -144,7 +144,7 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch default terminal --
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modm .|. shiftMask, xK_Return), spawn (myTerminal ++ " -e fish"))
 
     -- launch dmenu --
     , ((modm .|. shiftMask, xK_d     ), spawn "dmenu_run -h 24 -fn 'RobotoMono Nerd Font-9'")
