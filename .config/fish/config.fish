@@ -27,7 +27,7 @@ alias find="fd"
 
 # Git DotFiles
 alias dfgit='git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
-alias dfadd='dfgit add (bash dfadd)'
+alias dfadd="$LOCALBIN/dfadd"
 alias dfcommit="$LOCALBIN/dfcommit"
 alias dfpush='dfgit push all'
 
