@@ -14,8 +14,8 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                                "--normal","green","--high","red"] 10
                     , Run Memory ["-t","<fn=1> </fn> Memory: <used>M/<total>M (<usedratio>%)"] 10
                     , Run Com "uname" ["-s","-r"] "" 3600
-		    , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 8000
-		    , Run Com "/home/trey/.local/bin/getorphans" [] "orphanpkgs" 8000
+		    , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 2000
+		    , Run Com "/home/trey/.local/bin/getorphans" [] "orphanpkgs" 2000
 		    , Run Com "/home/trey/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
                     , Run Date "<fn=1> </fn> %a %b %_d %Y %H:%M:%S" "date" 10
                     , Run UnsafeStdinReader
