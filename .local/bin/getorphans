@@ -1,5 +1,5 @@
 #!/bin/bash
 
-orphanpkgcount=$(pacman -Qtdq | wc -l)
+orphanpkgcount=$(paru -Qtdq | wc -l)
 
 echo "$orphanpkgcount orphans "

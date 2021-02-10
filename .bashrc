@@ -5,7 +5,7 @@
 ### EXPORT
 export TERM="alacritty"
 export EDITOR="nvim"
-export PATH=/home/trey/.local/bin:$PATH
+export PATH=/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH
 export LOCALBIN=/home/trey/.local/bin
 
 ### ARCHIVE EXTRACTION
@@ -66,7 +66,7 @@ alias grep='rg --color=auto'
 
 # pacman and paru
 alias sysupd="paru -Syu --noconfirm; sysclean" 	#Update Everything
-alias sysclean='sudo paru -Rns $(pacman -Qtdq)' #Remove orphaned packages
+alias sysclean='sudo paru -Rns $(paru -Qtdq)' #Remove orphaned packages
 
 # Confirm Changes
 alias cp="cp -iv"

@@ -2,7 +2,7 @@
 set fish_greeting
 set TERM "alacritty"
 set EDITOR "nvim"
-set PATH "/home/trey/.local/bin:$PATH"
+set PATH "/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
 set LOCALBIN "/home/trey/.local/bin"
 
 ### ALIASES
