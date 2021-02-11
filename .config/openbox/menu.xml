@@ -8,6 +8,9 @@
             <item label="Atom"> <action name="Execute">
                 <execute>env ATOM_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT=false /usr/bin/atom</execute>
             </action> </item>
+            <item label="CMake"> <action name="Execute">
+                <execute>cmake-gui</execute>
+            </action> </item>
             <item label="Eclipse"> <action name="Execute">
                 <execute>/home/trey/eclipse/javascript-2020-12/eclipse/eclipse</execute>
             </action> </item>
@@ -58,6 +61,9 @@
             </action> </item>
         </menu>
         <menu id="2" label="Editors">
+            <item label="Emacs"> <action name="Execute">
+                <execute>alacritty -e emacs</execute>
+            </action> </item>
             <item label="Nano"> <action name="Execute">
                 <execute>alacritty -e nano</execute>
             </action> </item>
@@ -491,11 +497,11 @@
             <item label="Task Manager"> <action name="Execute">
                 <execute>xfce4-taskmanager</execute>
             </action> </item>
+            <item label="Timeshift"> <action name="Execute">
+                <execute>timeshift-launcher</execute>
+            </action> </item>
             <item label="Tint2"> <action name="Execute">
                 <execute>tint2</execute>
-            </action> </item>
-            <item label="USBImager"> <action name="Execute">
-                <execute>usbimager</execute>
             </action> </item>
             <item label="Virtual Machine Manager"> <action name="Execute">
                 <execute>virt-manager</execute>
