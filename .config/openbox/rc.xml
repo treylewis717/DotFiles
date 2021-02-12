@@ -308,6 +308,33 @@
       <command>kfmclient openProfile filemanagement</command>
     </action>
   </keybind>
+  <keybind key="W-S-Return">
+      <action name="Execute">
+          <startupnotify>
+              <enabled>true</enabled>
+              <name>Alacritty</name>
+          </startupnotify>
+          <command>alacritty</command>
+      </action>
+  </keybind>
+  <keybind key="W-S-d">
+      <action name="Execute">
+          <startupnotify>
+              <enabled>true</enabled>
+              <name>dmenu</name>
+          </startupnotify>
+          <command>dmenu -h 24 -fn 'RobotoMono Nerd Font-9'</command>
+      </action>
+  </keybind>
+  <keybind key="S-W-q">
+      <action name="Execute">
+          <startupnotify>
+              <enabled>true</enabled>
+              <name>Oblogout</name>
+          </startupnotify>
+          <command>oblogout</command>
+      </action>
+    </keybind>
 </keyboard>
 
 <mouse>
