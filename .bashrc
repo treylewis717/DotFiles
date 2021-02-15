@@ -6,7 +6,6 @@
 export TERM="alacritty"
 export EDITOR="nvim"
 export PATH=/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH
-export LOCALBIN=/home/trey/.local/bin
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -57,8 +56,6 @@ alias find="fd"
 
 # Git DotFiles
 alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
-alias dfadd="$LOCALBIN/dfadd"
-alias dfcommit="$LOCALBIN/dfcommit"
 alias dfpush='dfgit push all'
 
 # grep
