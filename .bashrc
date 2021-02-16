@@ -73,6 +73,9 @@ alias rm='rm -iv'
 # Clear
 alias clear='clear; neofetch'
 
+# Testing
+alias testtetext='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
+
 # Memey
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
