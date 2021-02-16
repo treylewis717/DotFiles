@@ -151,6 +151,9 @@
             <item label="Plex Media Player"> <action name="Execute">
                 <execute>plexmediaplayer</execute>
             </action> </item>
+            <item label="Podcasts"> <action name="Execute">
+                <execute>gnome-podcasts</execute>
+            </action> </item>
             <item label="PulseAudio Manager"> <action name="Execute">
                 <execute>paman</execute>
             </action> </item>
@@ -212,6 +215,9 @@
             </action> </item>
             <item label="Mail Reader"> <action name="Execute">
                 <execute>exo-open --launch MailReader</execute>
+            </action> </item>
+            <item label="News Flash"> <action name="Execute">
+                <execute>com.gitlab.newsflash</execute>
             </action> </item>
             <item label="qBittorrent"> <action name="Execute">
                 <execute>qbittorrent</execute>
