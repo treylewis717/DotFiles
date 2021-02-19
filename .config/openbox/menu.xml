@@ -17,6 +17,9 @@
             <item label="Electron"> <action name="Execute">
                 <execute>electron6</execute>
             </action> </item>
+            <item label="Fluid"> <action name="Execute">
+                <execute>fluid</execute>
+            </action> </item>
             <item label="GitKraken"> <action name="Execute">
                 <execute>gitkraken</execute>
             </action> </item>
@@ -230,6 +233,9 @@
             </action> </item>
             <item label="Steam (Runtime)"> <action name="Execute">
                 <execute>steam-runtime</execute>
+            </action> </item>
+            <item label="TigerVNC Viewer"> <action name="Execute">
+                <execute>vncviewer</execute>
             </action> </item>
             <item label="W3m"> <action name="Execute">
                 <execute>alacritty -e w3m</execute>

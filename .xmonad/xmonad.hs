@@ -64,7 +64,7 @@ myBrowser :: String
 myBrowser  = "brave"
 
 myEditor :: String
-myEditor = "notepadqq"
+myEditor = "emacs "
 
 -- Focus --
 myFocusFollowsMouse :: Bool
@@ -151,6 +151,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch flameshot --
     , ((modm .|. shiftMask, xK_p     ), spawn "flameshot gui")
+
+    -- launch xmenu --
+    , ((modm .|. shiftMask, xK_m     ), spawn "/home/trey/sourcecode/xmenu/xmenu.sh")
 
     -- launch TS --
     -- , ((modm .|. shiftMask, xK_Tab   ), treeselectAction tsDefaultConfig)
@@ -281,7 +284,8 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 -- Window Alterations --
 
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
+    [ title =? "spotify"        --> doShift ( myWorkspaces !! 1 )
+    , title =? "Discord"            --> doShift ( myWorkspaces !! 1 )
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
@@ -321,6 +325,8 @@ myStartupHook = do
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
         spawnOnce "kdeconnect-indicator"
         spawnOnce "crd --start"
+        spawnOnce "discord"
+        spawnOnce "spotify"
 
 
 

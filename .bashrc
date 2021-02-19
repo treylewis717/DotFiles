@@ -70,6 +70,9 @@ alias cp="cp -iv"
 alias mv='mv -iv'
 alias rm='rm -iv'
 
+# LightDM
+alias lock='light-locker-command -l'
+
 # Clear
 alias clear='clear; neofetch'
 
