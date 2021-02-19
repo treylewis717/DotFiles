@@ -3,7 +3,6 @@ set fish_greeting
 set TERM "alacritty"
 set EDITOR "nvim"
 set PATH "/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
-set LOCALBIN "/home/trey/.local/bin"
 
 ### ALIASES
 
@@ -12,9 +11,6 @@ alias r='su -'
 
 # ls
 alias ls='exa -lah --color=always --group-directories-first'
-
-# rm
-alias frm="rm -rf"
 
 # cat to bat
 alias cat="bat"
@@ -25,33 +21,41 @@ alias vim="nvim"
 # find
 alias find="fd"
 
-# Git DotFiles
-alias dfgit='git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
-alias dfadd="$LOCALBIN/dfadd"
-alias dfcommit="$LOCALBIN/dfcommit"
+# git dotfiles
+alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
 alias dfpush='dfgit push all'
 
 # grep
 alias grep='rg --color=auto'
 
 # pacman and paru
-alias sysupd="paru -Syu --noconfirm; sysclean" 	#Update Everything
-alias sysclean='sudo paru -Rns (pacman -Qtdq)' #Remove orphaned packages
+alias sysupd="paru -Syu --noconfirm; sysclean"  #Update Everything
+alias sysclean='sudo paru -Rns (paru -Qtdq)' #Remove orphaned packages
 
-# Confirm Changes
+# cp
 alias cp="cp -iv"
+
+# mv
 alias mv='mv -iv'
+
+# rm
 alias rm='rm -iv'
+alias frm="rm -rfiv"
 
-# Clear
-alias clear='clear; neofetch'
+# lightdm
+alias lock='light-locker-command -l'
 
-# Testing
+# clear
+alias clear='clear; echo " "; neofetch'
+
+# testing
 alias testtetext='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
+alias testpl='ping archlinux.org'
 
-# Memey
+# memey
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 ### Startup
+echo " "
 neofetch
 starship init fish | source
