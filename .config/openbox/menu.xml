@@ -183,6 +183,9 @@
             <item label="Avahi VNC Server Browser"> <action name="Execute">
                 <execute>bvnc</execute>
             </action> </item>
+            <item label="Badwolf"> <action name="Execute">
+                <execute>badwolf</execute>
+            </action> </item>
             <item label="Brave"> <action name="Execute">
                 <execute>brave</execute>
             </action> </item>
@@ -269,6 +272,9 @@
             </action> </item>
             <item label="gmrun"> <action name="Execute">
                 <execute>gmrun</execute>
+            </action> </item>
+            <item label="kitty"> <action name="Execute">
+                <execute>kitty</execute>
             </action> </item>
             <item label="MC"> <action name="Execute">
                 <execute>alacritty -e mc</execute>

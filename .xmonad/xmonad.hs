@@ -83,9 +83,9 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 myShowWNameTheme :: SWNConfig
 myShowWNameTheme = def
-    { swn_font              = "xft:Ubuntu:bold:size=60"
+    { swn_font              = "xft:RobotoMono Nerd Font:bold:size=60"
     , swn_fade              = 1.0
-    , swn_bgcolor           = "#1c1f24"
+    , swn_bgcolor           = "#282C34"
     , swn_color             = "#ffffff"
     }
 
