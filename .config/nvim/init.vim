@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set shell=/bin/bash
 
 " Vundle
     set rtp+=~/.vim/bundle/Vundle.vim
