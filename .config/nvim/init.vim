@@ -16,6 +16,9 @@ set shell=/bin/bash
     " Markdown Preview
     Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 
+    " GoCode
+    Plugin 'nsf/gocode', {'rtp': 'nvim/'}
+
     " CSS Color Previews
     Plugin 'ap/vim-css-color'
 

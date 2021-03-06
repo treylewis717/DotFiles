@@ -284,10 +284,9 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 -- Window Alterations --
 
 myManageHook = composeAll
-    [ title =? "spotify"        --> doShift ( myWorkspaces !! 1 )
+    [ title =? "Spotify"            --> doShift ( myWorkspaces !! 1 )
     , title =? "Discord"            --> doShift ( myWorkspaces !! 1 )
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "desktop_window" --> doIgnore ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -367,4 +366,4 @@ main = do
                                 , ppExtras = [windowCount]
                                 , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                                 }
-	}
+}

@@ -1,4 +1,9 @@
 #!/bin/bash
 
 checkupd=$(checkupdates | wc -l)
-echo "$checkupd updates "
+if [ "$checkupd" == 1 ]
+then
+   echo "$checkupd update"
+else
+   echo "$checkupd updates"
+fi

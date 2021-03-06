@@ -2,7 +2,8 @@
 set fish_greeting
 set TERM "alacritty"
 set EDITOR "nvim"
-set PATH "/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
+set PATH "/home/trey/android-platform-tools:/home/trey/.cargo/bin/racer:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
+set RUST_SRC_PATH "(rustc --print sysroot)/lib/rustlib/src/rust/library"
 
 ### ALIASES
 
@@ -22,7 +23,7 @@ alias vim="nvim"
 alias find="fd"
 
 # git dotfiles
-alias dfgit='/usr/bin/git --git-dir=/mnt/Games1/git-repos/DotFiles/ --work-tree=$HOME'
+alias dfgit='/usr/bin/git --git-dir=/mnt/ODrive1/git-repos/DotFiles/ --work-tree=$HOME'
 alias dfpush='dfgit push all'
 
 # grep
@@ -40,7 +41,7 @@ alias mv='mv -iv'
 
 # rm
 alias rm='rm -iv'
-alias frm="rm -rfiv"
+alias frm="rm -rfv"
 
 # lightdm
 alias lock='light-locker-command -l'
