@@ -29,6 +29,10 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+;; Elcord Discord Rich Presence
+(require 'elcord)
+(elcord-mode)
+
 ;; mu4e
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 ;;(require 'smtpmail)

@@ -4,7 +4,7 @@
 import XMonad
 import System.Directory
 import System.IO (hPutStrLn)
-import System.Exit
+import System.Exit (exitSuccess)
 import qualified XMonad.StackSet as W
 
   -- Data --
@@ -13,8 +13,10 @@ import Data.Tree
 import qualified Data.Map as M
 
   -- Actions --
+import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.MouseResize
 import qualified XMonad.Actions.TreeSelect as TS
+import XMonad.Actions.WithAll (killAll)
 
   -- System --
 import System.Exit
@@ -25,6 +27,7 @@ import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 
   -- Util --
+import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 
@@ -64,7 +67,7 @@ myBrowser :: String
 myBrowser  = "brave"
 
 myEditor :: String
-myEditor = "emacs "
+myEditor = "emacsclient -c -a emacs "
 
 -- Focus --
 myFocusFollowsMouse :: Bool
@@ -75,10 +78,12 @@ myClickJustFocuses = False
 
 -- Border Width --
 
+myBorderWidth :: Dimension
 myBorderWidth   = 2
 
 -- Workspaces --
 
+myWorkspaces :: [[Char]]
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 myShowWNameTheme :: SWNConfig
@@ -90,49 +95,51 @@ myShowWNameTheme = def
     }
 
 -- Border colors for unfocused and focused windows, respectively.
---
+
+myNormalBorderColor :: [Char]
 myNormalBorderColor  = "#dddddd"
+myFocusedBorderColor :: [Char]
 myFocusedBorderColor = "#ff0000"
 
 -- Tree Select (For Later) --
 
--- treeselectAction :: TS.TSConfig (X ()) -> X ()
---treeselectAction a = TS.treeselectAction a
-  --[ Node (TS.TSNode "+ Programming" (return ()))
-    --  [ Node (TS.TSNode "+ Git" (return ()))
-      --    [ Node (TS.TSNode ""
+{-treeselectAction :: TS.TSConfig (X ()) -> X ()
+treeselectAction a = TS.treeselectAction a
+  [ Node (TS.TSNode "+ Programming" (return ()))
+      [ Node (TS.TSNode "+ Git" (return ()))
+          [ Node (TS.TSNode ""
 
---tsDefaultConfig = TS.TSConfig a
---tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
-  --                         , TS.ts_background   = 0xc0c0c0c0
-    --                       , TS.ts_font         = "xft:Sans-16"
-      --                     , TS.ts_node         = (0xff000000, 0xff50d0db)
-        --                   , TS.ts_nodealt      = (0xff000000, 0xff10b8d6)
-          --                 , TS.ts_highlight    = (0xffffffff, 0xffff0000)
-            --               , TS.ts_extra        = 0xff000000
-              --             , TS.ts_node_width   = 200
-                --           , TS.ts_node_height  = 30
-                  --         , TS.ts_originX      = 0
-                    --       , TS.ts_originY      = 0
-                      --     , TS.ts_indent       = 80
-                        --   , TS.ts_navigate     = myTreeNavigation
-                          -- }
+tsDefaultConfig = TS.TSConfig a
+tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
+                           , TS.ts_background   = 0xc0c0c0c0
+                           , TS.ts_font         = "xft:Sans-16"
+                           , TS.ts_node         = (0xff000000, 0xff50d0db)
+                           , TS.ts_nodealt      = (0xff000000, 0xff10b8d6)
+                           , TS.ts_highlight    = (0xffffffff, 0xffff0000)
+                           , TS.ts_extra        = 0xff000000
+                           , TS.ts_node_width   = 200
+                           , TS.ts_node_height  = 30
+                           , TS.ts_originX      = 0
+                           , TS.ts_originY      = 0
+                           , TS.ts_indent       = 80
+                           , TS.ts_navigate     = myTreeNavigation
+                           }
 
---myTreeNavigation = M.fromList
-  --  [ ((0, xK_Escape), cancel)
-    --, ((0, xK_Return), select)
---    , ((0, xK_space),  select)
-  --  , ((0, xK_Up),     movePrev)
-    --, ((0, xK_Down),   moveNext)
---    , ((0, xK_Left),   moveParent)
-  --  , ((0, xK_Right),  moveChild)
-    --, ((0, xK_k),      movePrev)
---    , ((0, xK_j),      moveNext)
-  --  , ((0, xK_h),      moveParent)
-    --, ((0, xK_l),      moveChild)
---    , ((0, xK_o),      moveHistBack)
-  --  , ((0, xK_i),      moveHistForward)
-    --]
+myTreeNavigation = M.fromList
+    [ ((0, xK_Escape), cancel)
+    , ((0, xK_Return), select)
+    , ((0, xK_space),  select)
+    , ((0, xK_Up),     movePrev)
+    , ((0, xK_Down),   moveNext)
+    , ((0, xK_Left),   moveParent)
+    , ((0, xK_Right),  moveChild)
+    , ((0, xK_k),      movePrev)
+    , ((0, xK_j),      moveNext)
+    , ((0, xK_h),      moveParent)
+    , ((0, xK_l),      moveChild)
+    , ((0, xK_o),      moveHistBack)
+    , ((0, xK_i),      moveHistForward)
+    ] -}
 
 -- Functions --
 
@@ -141,7 +148,68 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 -- Key Bindings --
 
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
+myKeys :: [(String, X ())]
+myKeys =
+         -- launch default terminal --
+         [ ("M-S-<Return>", spawn (myTerminal ++ " -e fish"))
+         -- launch dmenu --
+         , ("M-S-d d", spawn "dmenu_run -h 24 -fn 'RobotoMono Nerd Font-9'")
+         , ("M-S-d c", spawn "/home/trey/dmenuscripts/dmenuconf")
+         , ("M-S-d s", spawn "/home/trey/dmenuscripts/dmenusearch")
+         -- launch flameshot --
+         , ("M-S-s", spawn "flameshot gui")
+         -- launch emacs --
+         , ("M-S-e", spawn myEditor)
+         -- launch xmenu --
+         , ("M-S-m", spawn "/home/trey/sourcecode/xmenu/xmenu.sh")
+         -- launch treeselect (for later) --
+         --, ("M-S-<Tab>", spawn treeselectAction tsDefaultConfig)
+         -- close focused window
+         , ("M-S-c", kill1)
+         -- close all windows in focused workspace --
+         , ("M-S-a", killAll)
+         -- change to next layout --
+         , ("M-<Space>", sendMessage NextLayout)
+         -- resize window to correct size --
+         , ("M-n", refresh)
+         -- move focus to next window --
+         , ("M-<Tab>", windows W.focusDown)
+         , ("M-j", windows W.focusDown)
+         -- move focus to previous window --
+         , ("M-k", windows W.focusUp)
+         -- move focus to master window --
+         , ("M-m", windows W.focusMaster)
+         -- swap focused and master windows --
+         , ("M-<Return>", windows W.swapMaster)
+         -- swap focused and next windows --
+         , ("M-S-j", windows W.swapDown)
+         -- swap focused and previous windows --
+         , ("M-S-k", windows W.swapUp)
+         -- shrink the master area --
+         , ("M-h", sendMessage Shrink)
+         -- expand the master area --
+         , ("M-l", sendMessage Expand)
+         -- push window back into tiling --
+         , ("M-t", withFocused $ windows . W.sink)
+         -- toggle struts --
+         , ("M-s", sendMessage ToggleStruts)
+         -- quit xmonad --
+         , ("M-S-q", io exitSuccess)
+         -- restart xmonad --
+         , ("M-q", spawn "xmonad --recompile; xmonad --restart")
+         -- multimedia keys --
+         , ("<XF86AudioStop>", spawn "playerctl stop")
+         , ("<XF86AudioPlay>", spawn "playerctl play-pause")
+         , ("<XF86AudioPrev>", spawn "playerctl previous")
+         , ("<XF86AudioNext>", spawn "playerctl next")
+         , ("<XF86AudioMute>",   spawn "amixer set Master toggle")
+         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
+         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+         ]
+
+-- Old Keybind layout for reference --
+{- myKeysOld :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
+myKeysOld conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch default terminal --
     [ ((modm .|. shiftMask, xK_Return), spawn (myTerminal ++ " -e fish"))
@@ -235,10 +303,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]] -}
 -- Mouse bindings --
-
+myMouseBindings :: XConfig l -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -283,6 +350,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 
 -- Window Alterations --
 
+myManageHook :: Query (Endo WindowSet)
 myManageHook = composeAll
     [ title =? "Spotify"            --> doShift ( myWorkspaces !! 1 )
     , title =? "Discord"            --> doShift ( myWorkspaces !! 1 )
@@ -296,7 +364,8 @@ myManageHook = composeAll
 -- Defines a custom handler function for X Events. The function should
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
---
+
+myEventHook :: Event -> X All
 myEventHook = mempty
 
 ------------------------------------------------------------------------
@@ -304,7 +373,8 @@ myEventHook = mempty
 
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
+
+myLogHook :: X ()
 myLogHook = return ()
 
 ------------------------------------------------------------------------
@@ -315,6 +385,7 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
+myStartupHook :: X ()
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom &"
@@ -322,10 +393,11 @@ myStartupHook = do
         spawnOnce "blueman-applet &"
         spawnOnce "volumeicon &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-        spawnOnce "kdeconnect-indicator"
-        spawnOnce "crd --start"
-        spawnOnce "discord"
-        spawnOnce "spotify"
+        spawnOnce "kdeconnect-indicator &"
+        spawnOnce "crd --start &"
+        spawnOnce "discord &"
+        spawnOnce "spotify &"
+        spawnOnce "emacs --daemon &"
 
 
 
@@ -335,7 +407,7 @@ main = do
   xmproc0 <- spawnPipe "xmobar -x 0 /home/trey/.config/xmobar/xmobarrc"
   xmonad $ docks def
         {
-      -- simple stuff
+      -- simple stuff --
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         clickJustFocuses   = myClickJustFocuses,
@@ -345,11 +417,10 @@ main = do
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
 
-      -- key bindings
-        keys               = myKeys,
+      -- key bindings --
         mouseBindings      = myMouseBindings,
 
-      -- hooks, layouts
+      -- hooks, layouts --
         layoutHook         = showWName' myShowWNameTheme $ myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
@@ -366,4 +437,4 @@ main = do
                                 , ppExtras = [windowCount]
                                 , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                                 }
-}
+} `additionalKeysP` myKeys
