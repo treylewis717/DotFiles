@@ -25,6 +25,7 @@ import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.SetWMName
 
   -- Util --
 import XMonad.Util.EZConfig (additionalKeysP)
@@ -67,7 +68,7 @@ myBrowser :: String
 myBrowser  = "brave"
 
 myEditor :: String
-myEditor = "emacsclient -c -a emacs "
+myEditor = "emacsclient -c -a emacs"
 
 -- Focus --
 myFocusFollowsMouse :: Bool
@@ -154,18 +155,16 @@ myKeys =
          [ ("M-S-<Return>", spawn (myTerminal ++ " -e fish"))
          -- launch dmenu --
          , ("M-S-d d", spawn "dmenu_run -h 24 -fn 'RobotoMono Nerd Font-9'")
-         , ("M-S-d c", spawn "/home/trey/dmenuscripts/dmenuconf")
-         , ("M-S-d s", spawn "/home/trey/dmenuscripts/dmenusearch")
          -- launch flameshot --
-         , ("M-S-s", spawn "flameshot gui")
-         -- launch emacs --
-         , ("M-S-e", spawn myEditor)
+         , ("M-S-p", spawn "flameshot gui")
          -- launch xmenu --
          , ("M-S-m", spawn "/home/trey/sourcecode/xmenu/xmenu.sh")
          -- launch treeselect (for later) --
          --, ("M-S-<Tab>", spawn treeselectAction tsDefaultConfig)
          -- close focused window
          , ("M-S-c", kill1)
+         -- start emacs --
+         , ("M-S-e", spawn myEditor)
          -- close all windows in focused workspace --
          , ("M-S-a", killAll)
          -- change to next layout --
@@ -364,7 +363,7 @@ myManageHook = composeAll
 -- Defines a custom handler function for X Events. The function should
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
-
+--
 myEventHook :: Event -> X All
 myEventHook = mempty
 
@@ -373,7 +372,7 @@ myEventHook = mempty
 
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
-
+--
 myLogHook :: X ()
 myLogHook = return ()
 
@@ -385,7 +384,7 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook :: X ()
+myStartupHook :: X()
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom &"
@@ -393,11 +392,12 @@ myStartupHook = do
         spawnOnce "blueman-applet &"
         spawnOnce "volumeicon &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-        spawnOnce "kdeconnect-indicator &"
-        spawnOnce "crd --start &"
-        spawnOnce "discord &"
-        spawnOnce "spotify &"
+        spawnOnce "kdeconnect-indicator"
+        spawnOnce "crd --start"
+        spawnOnce "discord"
+        spawnOnce "spotify"
         spawnOnce "emacs --daemon &"
+        setWMName "LG3D"
 
 
 

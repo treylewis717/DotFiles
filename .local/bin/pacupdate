@@ -1,6 +1,10 @@
 #!/bin/bash
 
-checkupd=$(checkupdates | wc -l)
+((checkpacupdate=$(checkupdates | wc -l)))
+((checkrustupdate=$(rustup check | grep "Update available" | wc -l)))
+
+((checkupd=$checkpacupdate+$checkrustupdate))
+
 if [ "$checkupd" == 1 ]
 then
    echo "$checkupd update"

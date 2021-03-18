@@ -2,8 +2,7 @@
 set fish_greeting
 set TERM "alacritty"
 set EDITOR "nvim"
-set PATH "/home/trey/android-platform-tools:/home/trey/.cargo/bin/racer:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
-set RUST_SRC_PATH "(rustc --print sysroot)/lib/rustlib/src/rust/library"
+set PATH "/home/trey/android-platform-tools:/home/trey/.cargo/bin/:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
 
 ### ALIASES
 
@@ -30,7 +29,7 @@ alias dfpush='dfgit push all'
 alias grep='rg --color=auto'
 
 # pacman and paru
-alias sysupd="paru -Syu --noconfirm; sysclean"  #Update Everything
+alias sysupd="paru -Syu --noconfirm; rustup update; sysclean"  #Update Everything
 alias sysclean='sudo paru -Rns (paru -Qtdq)' #Remove orphaned packages
 
 # cp

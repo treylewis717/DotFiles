@@ -33,6 +33,10 @@
 (require 'elcord)
 (elcord-mode)
 
+;; Rust
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
+
 ;; mu4e
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 ;;(require 'smtpmail)

@@ -2,45 +2,52 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 set shell=/bin/bash
 
-" Vundle
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-
-
-    " Vundle itself
-    Plugin 'gmarik/Vundle.vim'
+" vim-plug
+    call plug#begin('~/.vim/plugged')
 
     " Lightline
-    Plugin 'itchyny/lightline.vim'
+    Plug 'itchyny/lightline.vim'
 
     " Markdown Preview
-    Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+    Plug 'suan/vim-instant-markdown', {'rtp': 'after'}
 
     " GoCode
-    Plugin 'nsf/gocode', {'rtp': 'nvim/'}
+    Plug 'nsf/gocode', {'rtp': 'nvim/'}
 
     " CSS Color Previews
-    Plugin 'ap/vim-css-color'
+    Plug 'ap/vim-css-color'
 
     " Emojis
-    Plugin 'junegunn/vim-emoji'
+    Plug 'junegunn/vim-emoji'
 
-    call vundle#end()
+    " Rustic Syntax Support
+    Plug 'rust-lang/rust.vim'
+
+    " Vifm
+    Plug 'vifm/vifm.vim'
+
+    " Python Syntax Support
+    Plug 'vim-python/python-syntax'
+
+    " VimWiki
+    Plug 'vimwiki/vimwiki'
+
+    " Magit for vim
+    Plug 'jreybert/vimagit'
+
+    call plug#end()
     filetype plugin indent on
-    " To ignore plugin indent changes, instead use:
-    "filetype plugin on
-    "
-    " Brief help
-    " :PluginList       - lists configured plugins
-    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-    "
-    " see :h vundle for more details or wiki for FAQ
-    " Put your non-Plugin stuff after this line
 
+" General Settings
+    set expandtab    " Spaces instead of tabs
+    set smarttab     " SmartTab
+    set shiftwidth=4 " One tab == 4 spaces
+    set tabstop=4    " One tab == 4 spaces
+    set t_Co=256     " Set if term supports 256 bit color
+    let g:python_highlight_all = 1
+    syntax enable
 
-" Status Line
+" lightline
     let g:lightline = {
           \ 'colorscheme': 'darcula',
           \ }
@@ -50,8 +57,10 @@ set shell=/bin/bash
     " Prevents non-normal modes showing in powerline and below powerline
     set noshowmode
 
-" Text/Tab Stuff
-set expandtab    " Spaces instead of tabs
-set smarttab     " SmartTab
-set shiftwidth=4 " One tab == 4 spaces
-set tabstop=4    " One tab == 4 spaces
+" Keybindings
+    " Open terminal inside vim
+    map <Leader>tt :vnew term://fish<CR>
+
+" Vimwiki
+    let g:vimwiki_list = [{'path': '~/vimwiki/',
+                          \ 'syntax': 'markdown', 'ext': '.md'}]
