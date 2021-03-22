@@ -351,8 +351,9 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 
 myManageHook :: Query (Endo WindowSet)
 myManageHook = composeAll
-    [ title =? "Spotify"            --> doShift ( myWorkspaces !! 1 )
+    [ className =? "Spotify"        --> doShift ( myWorkspaces !! 1 )
     , title =? "Discord"            --> doShift ( myWorkspaces !! 1 )
+    , className =? "pyrogenesis"    --> doFloat
     , resource  =? "desktop_window" --> doIgnore ]
 
 ------------------------------------------------------------------------
@@ -397,7 +398,6 @@ myStartupHook = do
         spawnOnce "discord"
         spawnOnce "spotify"
         spawnOnce "emacs --daemon &"
-        setWMName "LG3D"
 
 
 
@@ -421,7 +421,7 @@ main = do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts --
-        layoutHook         = showWName' myShowWNameTheme $ myLayoutHook,
+        layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         startupHook        = myStartupHook,

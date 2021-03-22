@@ -130,13 +130,18 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
-                #widget.Image(
-                #    filename = "~/.config/qtile/icons.python.png",
-                #    mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('dmenu_run')}
-                #),
-                widget.CurrentLayout(),
+                widget.Image(
+                    filename = "~/.config/qtile/icons/python-white.png",
+                    scale = "False",
+                    mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('dmenu_run')}
+                ),
+                widget.CurrentLayout(
+                    foreground = "#000000",
+                    background = "#282C34",
+                    padding = 5
+                ),
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
@@ -184,13 +189,3 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
-wmname = "LG3D"

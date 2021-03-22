@@ -1,8 +1,12 @@
+#
+# ~/.bashrc
+#
+
 ### EXPORT
-set fish_greeting
-set TERM "alacritty"
-set EDITOR "nvim"
-set PATH "/home/trey/android-platform-tools:/home/trey/.cargo/bin/:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
+export TERM="alacritty"
+export EDITOR="nvim"
+export PATH=/home/trey/android-platform-tools:/home/trey/.cargo/bin:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library
 
 ### ALIASES
 
@@ -29,8 +33,8 @@ alias dfpush='dfgit push all'
 alias grep='rg --color=auto'
 
 # pacman and paru
-alias sysupd="paru -Syu --noconfirm; rustup update; sysclean"  #Update Everything
-alias sysclean='sudo paru -Rns (paru -Qtdq)' #Remove orphaned packages
+alias sysupd="paru -Syu --noconfirm; rustup update; sysclean" 	#Update Everything
+alias sysclean='sudo paru -Rns $(paru -Qtdq)' #Remove orphaned packages
 
 # cp
 alias cp="cp -iv"
@@ -46,16 +50,18 @@ alias frm="rm -rfv"
 alias lock='light-locker-command -l'
 
 # clear
-alias clear='/bin/clear; echo " "; neofetch'
+alias clear='clear; echo " "; neofetch'
 
-# testing
+# Testing
 alias testtetext='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
 alias testpl='ping archlinux.org'
 
-# memey
+# Memey
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 ### Startup
 echo " "
 neofetch
-starship init fish | source
+eval "$(starship init bash)"
+
+# PS1='[\u@\h \W]\$ '
