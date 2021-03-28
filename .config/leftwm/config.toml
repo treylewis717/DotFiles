@@ -4,13 +4,19 @@ tags = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 [[keybind]]
 command = "Execute"
-value = "dmenu_run"
+value = "emacsclient -c -a emacs"
+modifier = ["modkey", "Shift"]
+key = "e"
+
+[[keybind]]
+command = "Execute"
+value = "dmenu_run -h 24 -fn 'RobotoMono Nerd Font-9'"
 modifier = ["modkey", "Shift"]
 key = "d"
 
 [[keybind]]
 command = "Execute"
-value = "alacritty"
+value = "alacritty -e fish"
 modifier = ["modkey", "Shift"]
 key = "Return"
 
@@ -73,13 +79,8 @@ key = "Down"
 
 [[keybind]]
 command = "NextLayout"
-modifier = ["modkey", "Control"]
-key = "Up"
-
-[[keybind]]
-command = "PreviousLayout"
-modifier = ["modkey", "Control"]
-key = "Down"
+modifier = ["modkey"]
+key = "space"
 
 [[keybind]]
 command = "FocusWorkspaceNext"

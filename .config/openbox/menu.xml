@@ -26,8 +26,14 @@
             <item label="Fluid"> <action name="Execute">
                 <execute>fluid</execute>
             </action> </item>
+            <item label="GTK Demo"> <action name="Execute">
+                <execute>gtk4-demo</execute>
+            </action> </item>
             <item label="Icon Browser"> <action name="Execute">
                 <execute>yad-icon-browser</execute>
+            </action> </item>
+            <item label="Icon Browser"> <action name="Execute">
+                <execute>gtk4-icon-browser</execute>
             </action> </item>
             <item label="IDLE (Python IDE)"> <action name="Execute">
                 <execute>idle</execute>
@@ -35,17 +41,35 @@
             <item label="Notepadqq"> <action name="Execute">
                 <execute>notepadqq</execute>
             </action> </item>
+            <item label="Print Editor"> <action name="Execute">
+                <execute>gtk4-print-editor</execute>
+            </action> </item>
             <item label="Python"> <action name="Execute">
                 <execute>alacritty -e python</execute>
             </action> </item>
             <item label="Python (v2.7)"> <action name="Execute">
                 <execute>alacritty -e python2.7</execute>
             </action> </item>
+            <item label="Qt Assistant"> <action name="Execute">
+                <execute>assistant</execute>
+            </action> </item>
+            <item label="Qt Designer"> <action name="Execute">
+                <execute>designer</execute>
+            </action> </item>
+            <item label="Qt Linguist"> <action name="Execute">
+                <execute>linguist</execute>
+            </action> </item>
+            <item label="Qt QDbusViewer"> <action name="Execute">
+                <execute>qdbusviewer</execute>
+            </action> </item>
             <item label="Tclsh8.6"> <action name="Execute">
                 <execute>alacritty -e tclsh8.6</execute>
             </action> </item>
             <item label="VisualVM"> <action name="Execute">
                 <execute>visualvm</execute>
+            </action> </item>
+            <item label="Widget Factory"> <action name="Execute">
+                <execute>gtk4-widget-factory</execute>
             </action> </item>
         </menu>
         <menu id="2" label="Editors">
@@ -378,6 +402,9 @@
                     </action> </item>
                     <item label="LightDM GTK+ Greeter settings"> <action name="Execute">
                         <execute>lightdm-gtk-greeter-settings-pkexec</execute>
+                    </action> </item>
+                    <item label="Oomox: customize icons and GTK themes"> <action name="Execute">
+                        <execute>oomox-gui</execute>
                     </action> </item>
                     <item label="Privilege granting"> <action name="Execute">
                         <execute>gksu-properties</execute>

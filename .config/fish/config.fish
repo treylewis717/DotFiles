@@ -29,8 +29,7 @@ alias dfpush='dfgit push all'
 alias grep='rg --color=auto'
 
 # pacman and paru
-alias sysupd="paru -Syu --noconfirm; rustup update; sysclean"  #Update Everything
-alias sysclean='sudo paru -Rns (paru -Qtdq)' #Remove orphaned packages
+alias sysclean='paru -Rns (paru -Qtdq)' #Remove orphaned packages
 
 # cp
 alias cp="cp -iv"
