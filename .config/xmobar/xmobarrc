@@ -17,7 +17,7 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
 		    , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 2000
 		    , Run Com "/home/trey/.local/bin/getorphans" [] "orphanpkgs" 2000
 		    , Run Com "/home/trey/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
-                    , Run Date "<fn=1> </fn> %a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run Date "<fn=1> </fn> %A %B %_d %Y %H:%M:%S" "date" 10
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"

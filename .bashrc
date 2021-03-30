@@ -65,3 +65,4 @@ neofetch
 eval "$(starship init bash)"
 
 # PS1='[\u@\h \W]\$ '
+source "$HOME/.cargo/env"
