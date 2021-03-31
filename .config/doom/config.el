@@ -33,6 +33,9 @@
 (require 'elcord)
 (elcord-mode)
 
+;; Word Wrap
+(+word-wrap-mode)
+
 ;; Rust
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
@@ -40,7 +43,7 @@
 ;; mu4e
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 ;;(require 'smtpmail)
-(load "~/.doom.d/email")
+(load "~/.config/doom/email")
 ;; Select account in mu4e
 (defun my-mu4e-set-account ()
   "Set the account for composing a message."
