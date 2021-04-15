@@ -53,6 +53,9 @@ alias lock='light-locker-command -l'
 # clear
 alias clear='clear; echo " "; neofetch'
 
+# diff
+alias diff='colordiff'
+
 # Testing
 alias testtetext='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
 alias testpl='ping archlinux.org'
