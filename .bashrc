@@ -6,7 +6,8 @@
 export TERM="alacritty"
 export EDITOR="nvim"
 export PATH=/home/trey/android-platform-tools:/home/trey/.cargo/bin:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib
+export RUST_BACKTRACE=full
 
 ### ALIASES
 

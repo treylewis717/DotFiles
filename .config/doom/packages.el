@@ -51,3 +51,4 @@
 
 (package! evil-tutor)
 (package! elcord :recipe (:repo "Mstrodl/elcord"))
+(package! org-bullets)

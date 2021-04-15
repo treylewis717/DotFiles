@@ -1,7 +1,6 @@
 #!/bin/bash
 
-echo -e "Please enter commit message: "
 
-read message
+read -p "Please enter commit message: " message
 
 /usr/bin/git --git-dir=/mnt/ODrive1/git-repos/DotFiles/ --work-tree=$HOME commit -am "$message"

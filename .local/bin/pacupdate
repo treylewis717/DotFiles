@@ -1,6 +1,6 @@
 #!/bin/bash
 
-((checkpacupdate=$(checkupdates | wc -l)))
+((checkpacupdate=$(checkupdates+aur | wc -l)))
 ((checkrustupdate=$(rustup check | grep "Update available" | wc -l)))
 
 ((checkupd=$checkpacupdate+$checkrustupdate))
