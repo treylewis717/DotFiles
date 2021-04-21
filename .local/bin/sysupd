@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+paru -Syu --noconfirm
+rustup update
+doom sync
+paru -Rns $(paru -Qtdq)
