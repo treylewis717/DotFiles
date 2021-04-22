@@ -110,46 +110,6 @@ myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor :: [Char]
 myFocusedBorderColor = "#ff0000"
 
--- Tree Select (For Later) --
-
-{-treeselectAction :: TS.TSConfig (X ()) -> X ()
-treeselectAction a = TS.treeselectAction a
-  [ Node (TS.TSNode "+ Programming" (return ()))
-      [ Node (TS.TSNode "+ Git" (return ()))
-          [ Node (TS.TSNode ""
-
-tsDefaultConfig = TS.TSConfig a
-tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
-                           , TS.ts_background   = 0xc0c0c0c0
-                           , TS.ts_font         = "xft:Sans-16"
-                           , TS.ts_node         = (0xff000000, 0xff50d0db)
-                           , TS.ts_nodealt      = (0xff000000, 0xff10b8d6)
-                           , TS.ts_highlight    = (0xffffffff, 0xffff0000)
-                           , TS.ts_extra        = 0xff000000
-                           , TS.ts_node_width   = 200
-                           , TS.ts_node_height  = 30
-                           , TS.ts_originX      = 0
-                           , TS.ts_originY      = 0
-                           , TS.ts_indent       = 80
-                           , TS.ts_navigate     = myTreeNavigation
-                           }
-
-myTreeNavigation = M.fromList
-    [ ((0, xK_Escape), cancel)
-    , ((0, xK_Return), select)
-    , ((0, xK_space),  select)
-    , ((0, xK_Up),     movePrev)
-    , ((0, xK_Down),   moveNext)
-    , ((0, xK_Left),   moveParent)
-    , ((0, xK_Right),  moveChild)
-    , ((0, xK_k),      movePrev)
-    , ((0, xK_j),      moveNext)
-    , ((0, xK_h),      moveParent)
-    , ((0, xK_l),      moveChild)
-    , ((0, xK_o),      moveHistBack)
-    , ((0, xK_i),      moveHistForward)
-    ] -}
-
 -- Functions --
 
 windowCount :: X (Maybe String)
@@ -172,7 +132,11 @@ myKeys =
          -- close focused window
          , ("M-S-c", kill1)
          -- start emacs --
-         , ("M-S-e", spawn myEditor)
+         , ("M-S-e e", spawn myEditor)
+         -- start mu4e --
+         , ("M-S-e m", spawn (myEditor ++ "--eval '(mu4e)'"))
+         -- start dired --
+         , ("M-S-e d", spawn (myEditor ++ "--eval '(dired nil)'"))
          -- close all windows in focused workspace --
          , ("M-S-a", killAll)
          -- change to next layout --
@@ -384,7 +348,6 @@ myStartupHook = do
         spawnOnce "blueman-applet &"
         spawnOnce "volumeicon &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-        spawnOnce "kdeconnect-indicator"
         spawnOnce "crd --start"
         spawnOnce "discord &"
         spawnOnce "spotify &"
