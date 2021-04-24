@@ -136,7 +136,7 @@ myKeys =
          -- start mu4e --
          , ("M-S-e m", spawn (myEditor ++ "--eval '(mu4e)'"))
          -- start dired --
-         , ("M-S-e d", spawn (myEditor ++ "--eval '(dired nil)'"))
+         , ("M-S-e d", spawn (myEditor ++ "--eval '(dired)'"))
          -- close all windows in focused workspace --
          , ("M-S-a", killAll)
          -- change to next layout --
@@ -278,7 +278,7 @@ myKeysOld conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 -- Mouse bindings --
 
-myMouseBindings :: XConfig l -> M.Map (KeyMask, Button) (Window -> X ())
+myMouseBindings :: (XConfig l -> M.Map (KeyMask, Button) (Window -> X ()))
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -348,10 +348,12 @@ myStartupHook = do
         spawnOnce "blueman-applet &"
         spawnOnce "volumeicon &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-        spawnOnce "crd --start"
+        spawnOnce "crd --start &"
         spawnOnce "discord &"
         spawnOnce "spotify &"
         spawnOnce "emacs --daemon &"
+        spawnOnce "/home/trey/.config/conky/getAlbumCoverConky &"
+        spawnOnce "conky"
 
 -- Main --
 

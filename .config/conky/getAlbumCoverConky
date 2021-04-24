@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+while true; do
+album=$(playerctl metadata -p spotify mpris:artUrl | sed "s/open\.spotify\.com/i.scdn.co/")
+
+if [[ ! $album == "$currentalbum" ]]
+then
+    wget "$album" -O /tmp/ConkyAlbumCover
+    currentalbum="$album"
+else
+    echo "Album is same!"
+fi
+
+sleep 1
+done
