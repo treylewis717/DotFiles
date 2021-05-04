@@ -2,9 +2,8 @@
 set fish_greeting
 set TERM "alacritty"
 set EDITOR "nvim"
-set PATH "/home/trey/android-platform-tools:/home/trey/.cargo/bin/:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
-export RUST_SRC_PATH="/home/trey/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib"
-export RUST_BACKTRACE=full
+set -gx PATH "/home/trey/android-platform-tools:/home/trey/.cargo/bin/:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
+set -gx RUST_BACKTRACE 1
 
 ### ALIASES
 

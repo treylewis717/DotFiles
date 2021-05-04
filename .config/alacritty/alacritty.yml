@@ -1,3 +1,11 @@
+title: Alacritty
+
+class:
+    instance: Alacritty
+    general: Alacritty
+
+dynamic_title: false
+
 colors:
   primary:
     background: '#282c34'
@@ -18,5 +26,4 @@ font:
   size: 11.0
   offset:
     x: 0
-    y: 1
-
+    y: 0

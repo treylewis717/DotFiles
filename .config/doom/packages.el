@@ -50,5 +50,7 @@
 ;(unpin! t)
 
 (package! evil-tutor)
-(package! elcord :recipe (:repo "Mstrodl/elcord"))
+(package! elcord)
 (package! org-bullets)
+(package! dired-open)
+(package! peep-dired)

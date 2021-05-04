@@ -57,11 +57,28 @@
             ("ddg" . "https://duckduckgo.com/?q=")
             ("wiki" . "https://en.wikipedia.org/wiki/"))))
 
+;; Make 'h' and 'l' go back and forward in dired. Much faster to navigate the directory structure!
+(evil-define-key 'normal dired-mode-map
+  (kbd "h") 'dired-up-directory
+  (kbd "l") 'dired-open-file) ; use dired-find-file instead if not using dired-open package
+;; If peep-dired is enabled, you will get image previews as you go up/down with 'j' and 'k'
+(evil-define-key 'normal peep-dired-mode-map
+  (kbd "j") 'peep-dired-next-file
+  (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+;; Get file icons in dired
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;; With dired-open plugin, you can launch external programs for certain extensions
+;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
+(setq dired-open-extensions '(("gif" . "sxiv")
+                              ("jpg" . "sxiv")
+                              ("png" . "sxiv")
+                              ("mkv" . "mpv")
+                              ("mp4" . "mpv")))
+
 ;; mu4e
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-;;(require 'smtpmail)
 (load "~/.config/doom/email")
-;; Select account in mu4e
 (defun my-mu4e-set-account ()
   "Set the account for composing a message."
   (let* ((account
@@ -83,19 +100,26 @@
 
 (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
 
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
+;; (load "~/.config/doom/dashboard")
+
+;; Dashboard
+;; (use-package dashboard
+;;   :init
+;;   (setq dashboard-set-heading-icons t)
+;;   (setq dashboard-set-file-icons t)
+;;   (setq dashboard-banner-logo-title nil)
+;;   (setq dashboard-startup-banner "~/.config/doom/doom.txt")
+;;   (setq dashboard-set-footer nil)
+;;   (setq dashboard-center-content nil)
+;;   (setq dashboard-show-shortcuts nil)
+;;   (setq dashboard-set-init-info nil)
+;;   (setq dashboard-items '((recents . 5)
+;;                           (agenda . 5 )
+;;                           (bookmarks . 5)
+;;                           (projects . 5)))
+;;   :config
+;;   (dashboard-setup-startup-hook)
+;;   (dashboard-modify-heading-icons '((recents . "file-text")
+;;                                    (bookmarks . "book"))))
+
+;; (setq doom-fallback-buffer "*dashboard*")

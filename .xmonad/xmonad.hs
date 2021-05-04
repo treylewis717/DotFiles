@@ -136,7 +136,7 @@ myKeys =
          -- start mu4e --
          , ("M-S-e m", spawn (myEditor ++ "--eval '(mu4e)'"))
          -- start dired --
-         , ("M-S-e d", spawn (myEditor ++ "--eval '(dired)'"))
+         , ("M-S-e d", spawn (myEditor ++ "--eval '(dired nil)'"))
          -- close all windows in focused workspace --
          , ("M-S-a", killAll)
          -- change to next layout --
@@ -169,10 +169,10 @@ myKeys =
          -- restart xmonad --
          , ("M-q", spawn "xmonad --recompile; xmonad --restart")
          -- multimedia keys --
-         , ("<XF86AudioStop>", spawn "playerctl stop")
-         , ("<XF86AudioPlay>", spawn "playerctl play-pause")
-         , ("<XF86AudioPrev>", spawn "playerctl previous")
-         , ("<XF86AudioNext>", spawn "playerctl next")
+         , ("<XF86AudioStop>", spawn "playerctl -p spotify stop")
+         , ("<XF86AudioPlay>", spawn "playerctl -p spotify play-pause")
+         , ("<XF86AudioPrev>", spawn "playerctl -p spotify previous")
+         , ("<XF86AudioNext>", spawn "playerctl -p spotify next")
          , ("<XF86AudioMute>",   spawn "amixer set Master toggle")
          , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
          , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
@@ -353,7 +353,7 @@ myStartupHook = do
         spawnOnce "spotify &"
         spawnOnce "emacs --daemon &"
         spawnOnce "/home/trey/.config/conky/getAlbumCoverConky &"
-        spawnOnce "conky"
+        spawnOnce "conky &"
 
 -- Main --
 

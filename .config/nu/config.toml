@@ -1,0 +1,7 @@
+skip_welcome_message = "true"
+edit_mode = "vi"
+max_history_size = 100
+startup = [
+	"alias vim = nvim",
+	"alias ls = exa -lah",
+	]

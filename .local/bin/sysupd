@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
+if [[ "emacs" =~ "$(paru -Qu)" ]]; then
+    doom build
+else
+    doom build
+fi
+
 paru -Syu --noconfirm
 rustup update
 doom sync
+doom upgrade
 paru -Rns $(paru -Qtdq)
