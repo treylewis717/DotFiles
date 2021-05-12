@@ -1,3 +1,15 @@
+#+TITLE: TL Doom Emacs Config
+#+PROPERTY: header-args :tangle config.el
+
+* Doom Emacs Config
+Doom Emacs is a distrobution of GNU Emacs that brings speed improvements and ease of use to the table which are things GNU Emacs lacks.
+
+Official Documentation: https://github.com/hlissner/doom-emacs/blob/develop/docs/index.org
+
+* FONTS
+Sets the font and changes a few settings for visual improvements.
+
+#+begin_src emacs-lisp
 (setq doom-font (font-spec :family "RobotoMono Nerd Font" :size 12 :antialias true)
       doom-big-font (font-spec :family "RobotoMono Nerd Font" :size 16 :antialias true))
 (after! doom-themes
@@ -7,19 +19,49 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 (setq global-prettify-symbols-mode t)
+#+end_src
 
+* Theme
+Sets the theme.
+
+#+begin_src emacs-lisp
 (setq doom-theme 'doom-one)
+#+end_src
 
+* Line Numbers
+Enables line numbers.
+
+#+begin_src emacs-lisp
 (setq display-line-numbers-type t)
+#+end_src
 
+* Elcord
+Elcord is a plugin that enables Discord rich presence for Emacs.
+
+#+begin_src emacs-lisp
 (require 'elcord)
 (setq elcord-mode t)
+#+end_src
 
+* Word Wrap
+Enables Word Wrap.
+
+#+begin_src emacs-lisp
 (setq +word-wrap-mode t)
+#+end_src
 
+* Rust
+Enables rust-mode when editing a *.rs file.
+
+#+begin_src emacs-lisp
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
+#+end_src
 
+* Org
+Sets settings for org-mode such as the directory, the org-agenda file, the journal directory, etc.
+
+#+begin_src emacs-lisp
 (after! org
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   (setq org-directory "~/Org/"
@@ -50,7 +92,12 @@
                               ("png" . "sxiv")
                               ("mkv" . "mpv")
                               ("mp4" . "mpv")))
+#+end_src
 
+* mu4e
+Enables mu4e. My emails are contained in a seperate file for privacy reasons.
+
+#+begin_src emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (load "~/.config/doom/email")
 (defun my-mu4e-set-account ()
@@ -73,6 +120,12 @@
       (error "No email account found"))))
 
 (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
+#+end_src
 
+* Emojis
+Enables emoji support.
+
+#+begin_src emacs-lisp
 (use-package emojify
   :hook (after-init . global-emojify-mode))
+#+end_src

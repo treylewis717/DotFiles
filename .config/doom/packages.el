@@ -54,3 +54,5 @@
 (package! org-bullets)
 (package! dired-open)
 (package! peep-dired)
+(package! emojify)
+(package! pianobar)

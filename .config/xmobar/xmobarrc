@@ -12,7 +12,7 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                       Run Network "wlan0" ["-t", "<fn=1> </fn>  <rx>kb  <fn=1> </fn>  <tx>kb"] 10
                     , Run Cpu ["-t", "<fn=1> </fn> CPU: (<total>%)", "-H","50",
                                "--normal","green","--high","red"] 10
-                    , Run Memory ["-t","<fn=1> </fn> Memory: <used>M/<total>M (<usedratio>%)"] 10
+                    , Run Memory ["-t","<fn=1> </fn> Memory: (<usedratio>%)"] 10
                     , Run Com "uname" ["-s","-r"] "" 3600
 		    , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 2000
 		    , Run Com "/home/trey/.local/bin/getorphans" [] "orphanpkgs" 2000
