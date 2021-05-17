@@ -6,12 +6,10 @@ Doom Emacs is a distrobution of GNU Emacs that brings speed improvements and eas
 
 Official Documentation: https://github.com/hlissner/doom-emacs/blob/develop/docs/index.org
 
-* FONTS
+* Fonts
 Sets the font and changes a few settings for visual improvements.
 
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "RobotoMono Nerd Font" :size 12 :antialias true)
-      doom-big-font (font-spec :family "RobotoMono Nerd Font" :size 16 :antialias true))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -47,7 +45,7 @@ Elcord is a plugin that enables Discord rich presence for Emacs.
 Enables Word Wrap.
 
 #+begin_src emacs-lisp
-(setq +word-wrap-mode t)
+(+word-wrap-mode)
 #+end_src
 
 * Rust
@@ -78,7 +76,12 @@ Sets settings for org-mode such as the directory, the org-agenda file, the journ
             ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
             ("ddg" . "https://duckduckgo.com/?q=")
             ("wiki" . "https://en.wikipedia.org/wiki/"))))
+#+end_src
 
+* Dired
+Some options for the built-in file manager.
+
+#+begin_src emacs-lisp
 (evil-define-key 'normal dired-mode-map
   (kbd "h") 'dired-up-directory
   (kbd "l") 'dired-open-file)

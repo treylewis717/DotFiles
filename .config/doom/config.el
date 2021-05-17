@@ -1,5 +1,3 @@
-(setq doom-font (font-spec :family "RobotoMono Nerd Font" :size 12 :antialias true)
-      doom-big-font (font-spec :family "RobotoMono Nerd Font" :size 16 :antialias true))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -15,7 +13,7 @@
 (require 'elcord)
 (setq elcord-mode t)
 
-(setq +word-wrap-mode t)
+(+word-wrap-mode)
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))

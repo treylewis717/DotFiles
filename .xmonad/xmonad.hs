@@ -10,14 +10,12 @@ import qualified XMonad.StackSet as W
   -- Data --
 import Data.Monoid
 import Data.Maybe (fromJust)
-import Data.Tree
 import qualified Data.Map as M
 
   -- Actions --
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.SpawnOn
-import qualified XMonad.Actions.TreeSelect as TS
 import XMonad.Actions.WithAll (killAll)
 
   -- System --
@@ -125,6 +123,8 @@ myKeys =
          , ("M-S-d d", spawn "dmenu_run")
          -- launch flameshot --
          , ("M-S-p", spawn "flameshot gui")
+         -- launch brave --
+         , ("M-S-b", spawn "brave")
          -- launch xmenu --
          , ("M-S-m", spawn "/home/trey/sourcecode/xmenu/xmenu.sh")
          -- launch treeselect (for later) --
@@ -326,6 +326,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 myManageHook :: Query (Endo WindowSet)
 myManageHook = composeAll
     [ className =? "pyrogenesis"    --> doFloat
+    , className =? "qalculate-gtk"  --> doFloat
     , resource  =? "desktop_window" --> doIgnore ]
 
 -- Event Handling --
@@ -342,18 +343,19 @@ myLogHook = return ()
 
 myStartupHook :: X ()
 myStartupHook = do
-        spawnOnce "nitrogen --restore &"
-        spawnOnce "picom &"
-        spawnOnce "nm-applet &"
-        spawnOnce "blueman-applet &"
-        spawnOnce "volumeicon &"
-        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-        spawnOnce "crd --start &"
-        spawnOnce "discord &"
-        spawnOnce "spotify &"
-        spawnOnce "emacs --daemon &"
-        spawnOnce "/home/trey/.config/conky/getAlbumCoverConky &"
-        spawnOnce "conky &"
+        spawnOnce "/home/trey/.config/autostart/autostart.sh"
+        -- spawnOnce "nitrogen --restore &"
+        -- spawnOnce "picom &"
+        -- spawnOnce "nm-applet &"
+        -- spawnOnce "blueman-applet &"
+        -- spawnOnce "volumeicon &"
+        -- spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
+        -- spawnOnce "crd --start &"
+        -- spawnOnce "discord &"
+        -- spawnOnce "spotify &"
+        -- spawnOnce "emacs --daemon &"
+        -- spawnOnce "/home/trey/.config/conky/getAlbumCoverConky &"
+        -- spawnOnce "conky &"
 
 -- Main --
 
