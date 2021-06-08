@@ -10,6 +10,8 @@ Official Documentation: https://github.com/hlissner/doom-emacs/blob/develop/docs
 Sets the font and changes a few settings for visual improvements.
 
 #+begin_src emacs-lisp
+(setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
+      doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))

@@ -1,8 +1,9 @@
 modkey = "Mod4"
 mousekey = "Mod4"
 layouts = [
-    "MainAndHorizontalStack",
+    "MainAndVertStack",
     "Monocle",
+    "GridHorizontal",
 ]
 tags = ["Main", "Background", "Extra"]
 disable_current_tag_swap = true
@@ -25,3 +26,159 @@ command = "Execute"
 value = "dmenu_run"
 modifier = ["modkey", "Shift"]
 key = "d"
+
+[[keybind]]
+command = "Execute"
+value = "flameshot gui"
+modifier = ["modkey", "Shift"]
+key = "p"
+
+[[keybind]]
+command = "Execute"
+value = "brave"
+modifier = ["modkey", "Shift"]
+key = "b"
+
+# Music Player Commands
+[[keybind]]
+command = "Execute"
+value = "playerctl -p spotify stop"
+modifier = []
+key = "XF86XK_AudioStop"
+
+[[keybind]]
+command = "Execute"
+value = "playerctl -p spotify play-pause"
+modifier = []
+key = "XF86XK_AudioPlay"
+
+[[keybind]]
+command = "Execute"
+value = "playerctl -p spotify previous"
+modifier = []
+key = "XF86XK_AudioPrev"
+
+[[keybind]]
+command = "Execute"
+value = "playerctl -p spotify next"
+modifier = []
+key = "XF86XK_AudioNext"
+
+[[keybind]]
+command = "Execute"
+value = "amixer set Master toggle"
+modifier = []
+key = "XF86XK_AudioMute"
+
+[[keybind]]
+command = "Execute"
+value = "amixer set Master 5%- unmute"
+modifier = []
+key = "XF86XK_AudioLowerVolume"
+
+[[keybind]]
+command = "Execute"
+value = "amixer set Master 5%+ unmute"
+modifier = []
+key = "XF86XK_AudioRaiseVolume"
+
+# LeftWM
+[[keybind]]
+command = "SoftReload"
+modifier = ["modkey"]
+key = "q"
+
+[[keybind]]
+command = "Execute"
+value = "pkill leftwm"
+modifier = ["modkey", "Shift"]
+key = "q"
+
+# Windows
+[[keybind]]
+command = "CloseWindow"
+modifier = ["modkey", "Shift"]
+key = "c"
+
+#[[keybind]]
+#command = "FloatingToTile"
+#modifier = ["modkey"]
+#key = "t"
+
+[[keybind]]
+command = "MoveWindowTop"
+modifier = ["modkey"]
+key = "Return"
+
+[[keybind]]
+command = "MoveToTag"
+value = "1"
+modifier = ["modkey", "Shift"]
+key = "1"
+
+[[keybind]]
+command = "MoveToTag"
+value = "2"
+modifier = ["modkey", "Shift"]
+key = "2"
+
+[[keybind]]
+command = "MoveToTag"
+value = "3"
+modifier = ["modkey", "Shift"]
+key = "3"
+
+# Layouts
+[[keybind]]
+command = "NextLayout"
+modifier = ["modkey"]
+key = "space"
+
+# Tags
+[[keybind]]
+command = "GotoTag"
+value = "1"
+modifier = ["modkey"]
+key = "1"
+
+[[keybind]]
+command = "GotoTag"
+value = "2"
+modifier = ["modkey"]
+key = "2"
+
+[[keybind]]
+command = "GotoTag"
+value = "3"
+modifier = ["modkey"]
+key = "3"
+
+[[keybind]]
+command = "MoveToTag"
+value = "1"
+modifier = ["modkey", "Shift"]
+key = "1"
+
+[[keybind]]
+command = "MoveToTag"
+value = "2"
+modifier = ["modkey", "Shift"]
+key = "2"
+
+[[keybind]]
+command = "MoveToTag"
+value = "3"
+modifier = ["modkey", "Shift"]
+key = "3"
+
+[[keybind]]
+command = "DecreaseMainWidth"
+value = "5"
+modifier = ["modkey"]
+key = "h"
+
+[[keybind]]
+command = "IncreaseMainWidth"
+value = "5"
+modifier = ["modkey"]
+key = "l"

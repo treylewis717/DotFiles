@@ -1,3 +1,5 @@
+(setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
+      doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))

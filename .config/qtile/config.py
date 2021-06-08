@@ -1,11 +1,12 @@
 from typing import List  # noqa: F401
 
-from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile import bar, layout, widget, hook
+from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
 from libqtile.lazy import lazy
 
 mod = "mod4"
 myTerm = "alacritty"
+myEditor = "emacsclient -c -a emacs"
 
 keys = [
     # Windows and Layouts
@@ -52,11 +53,36 @@ keys = [
     Key([mod], "r", lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"),
 
+    # Multimedia
+    Key([], "XF86AudioStop", lazy.spawn("playerctl -p spotify stop"),
+        desc="Stop music"),
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl -p spotify play-pause"),
+        desc="Play/Pause music"),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl -p spotify previous"),
+        desc="Goes to previous track"),
+    Key([], "XF86AudioNext", lazy.spawn("playerctl -p spotify next"),
+        desc="Goes to next track"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle"),
+        desc="Mute audio"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%- unmute"),
+        desc="Lower volume"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+ unmute")),
+
     # Programs
     Key([mod, "shift"], "Return", lazy.spawn(myTerm+" -e fish"),
         desc="Launch terminal"),
-    Key([mod, "shift"], "d", lazy.spawn("dmenu_run"),
-        desc="Launch dmenu"),
+    KeyChord([mod, "shift"], "d", [
+        Key([], "d", lazy.spawn("dmenu_run"),
+            desc="Spawn normal dmenu"),
+    ]),
+    KeyChord([mod, "shift"], "e", [
+        Key([], "e", lazy.spawn(myEditor),
+            desc="Spawn Emacs"),
+        Key([], "m", lazy.spawn(myEditor+"--eval '(mu4e)'"),
+            desc="Spawn mu4e in Emacs"),
+        Key([], "d", lazy.spawn(myEditor+"--eval '(dired nil)'"),
+            desc="Spawn dired in Emacs"),
+    ])
 ]
 
 group_names = [("Main", {'layout': 'monadtall'}),

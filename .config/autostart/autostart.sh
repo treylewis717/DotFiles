@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-picom --no-fading-openclose --fade-delta-time 0 &
 nitrogen --restore &
 nm-applet &
 blueman-applet &

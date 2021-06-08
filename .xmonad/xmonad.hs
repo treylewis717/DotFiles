@@ -127,8 +127,6 @@ myKeys =
          , ("M-S-b", spawn "brave")
          -- launch xmenu --
          , ("M-S-m", spawn "/home/trey/sourcecode/xmenu/xmenu.sh")
-         -- launch treeselect (for later) --
-         --, ("M-S-<Tab>", spawn treeselectAction tsDefaultConfig)
          -- close focused window
          , ("M-S-c", kill1)
          -- start emacs --
@@ -345,7 +343,7 @@ myStartupHook :: X ()
 myStartupHook = do
         spawnOnce "/home/trey/.config/autostart/autostart.sh"
         -- spawnOnce "nitrogen --restore &"
-        -- spawnOnce "picom &"
+        spawnOnce "picom --no-fading-openclose --fade-delta-time 0 &"
         -- spawnOnce "nm-applet &"
         -- spawnOnce "blueman-applet &"
         -- spawnOnce "volumeicon &"
