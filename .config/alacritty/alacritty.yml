@@ -6,9 +6,51 @@ class:
 
 dynamic_title: false
 
+env:
+  TERM: alacritty
+
+scrolling:
+  history: 40000
+  multiplier: 10
+
 colors:
   primary:
     background: '#282c34'
+  normal:
+    black:   '#1b2229'
+    red:     '#ff6c6b'
+    green:   '#98be65'
+    yellow:  '#ecbe7b'
+    blue:    '#2257a0'
+    magenta: '#c678dd'
+    cyan:    '#46d9ff'
+    white:   '#dfdfdf'
+  bright:
+    black:   '#484e53'
+    red:     '#ff8585'
+    green:   '#accb83'
+    yellow:  '#efcb95'
+    blue:    '#4e78b3'
+    magenta: '#d193e3'
+    cyan:    '#6ae0ff'
+    white:   '#e5e5e5'
+  dim:
+    black:   '#151b20'
+    red:     '#cc5655'
+    green:   '#799850'
+    yellow:  '#bc9862'
+    blue:    '#1b4580'
+    magenta: '#8e60b0'
+    cyan:    '#38adcc'
+    white:   '#b2b2b2'
+
+
+background_opacity: 1.0
+
+shell:
+  program: /usr/bin/fish
+
+draw_bold_text_with_bright_colors: false
 
 font:
   normal:

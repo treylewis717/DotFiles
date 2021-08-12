@@ -17,6 +17,7 @@ import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.WithAll (killAll)
+import XMonad.Actions.CycleWS (moveTo, WSType( WSIs ))
 
   -- System --
 import System.Exit
@@ -25,7 +26,9 @@ import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.DynamicProperty (dynamicPropertyChange)
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsEventHook, ewmhDesktopsStartup, fullscreenEventHook)
 
   -- Util --
 import XMonad.Util.EZConfig (additionalKeysP)
@@ -86,8 +89,7 @@ myBorderWidth   = 2
 -- Workspaces --
 
 myWorkspaces :: [[Char]]
---myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces = [" Main ", " Background ", " Extra ", " VM "]
+myWorkspaces = [" Main ", " Background ", " Gaming ", " Entertainment ", " VM ", " Extra "]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -323,14 +325,24 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 
 myManageHook :: Query (Endo WindowSet)
 myManageHook = composeAll
-    [ className =? "pyrogenesis"    --> doFloat
-    , className =? "qalculate-gtk"  --> doFloat
-    , resource  =? "desktop_window" --> doIgnore ]
+    [ className =? "pyrogenesis"        --> doFloat
+    , className =? "qalculate-gtk"      --> doFloat
+    , className =? "discord"            --> doShift ( myWorkspaces !! 1 )
+    , className =? "Barrier"            --> doShift ( myWorkspaces !! 1 )
+    , className =? "Steam"              --> doShift ( myWorkspaces !! 2 )
+    , className =? "lbry"               --> doShift ( myWorkspaces !! 3 )
+    , className =? "VirtualBox Manager" --> doShift ( myWorkspaces !! 4 )
+    , className =? "emacs"              --> doShift
+    , resource  =? "desktop_window"     --> doIgnore ]
 
 -- Event Handling --
 
-myEventHook :: Event -> X All
-myEventHook = mempty
+spotifyEventHook:: Event -> X All
+spotifyEventHook = dynamicPropertyChange "WM_NAME" (className =? "Spotify" --> doShift ( myWorkspaces !! 1 ))
+
+
+myEventHook:: Event -> X All
+myEventHook = handleEventHook def <+> spotifyEventHook <+> fullscreenEventHook <+> ewmhDesktopsEventHook
 
 -- Logging --
 
@@ -341,26 +353,27 @@ myLogHook = return ()
 
 myStartupHook :: X ()
 myStartupHook = do
-        spawnOnce "/home/trey/.config/autostart/autostart.sh"
-        -- spawnOnce "nitrogen --restore &"
-        spawnOnce "picom --no-fading-openclose --fade-delta-time 0 &"
-        -- spawnOnce "nm-applet &"
-        -- spawnOnce "blueman-applet &"
-        -- spawnOnce "volumeicon &"
-        -- spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-        -- spawnOnce "crd --start &"
-        -- spawnOnce "discord &"
-        -- spawnOnce "spotify &"
-        -- spawnOnce "emacs --daemon &"
-        -- spawnOnce "/home/trey/.config/conky/getAlbumCoverConky &"
-        -- spawnOnce "conky &"
+        spawnOnce "lxsession &"
+        spawnOnce "nm-applet &"
+        spawnOnce "blueman-applet &"
+        spawnOnce "volumeicon &"
+        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
+        spawnOnce "crd --start &"
+        spawnOnce "discord &"
+        spawnOnce "spotify &"
+        spawnOnce "emacs --daemon &"
+        spawnOnce "flameshot &"
+        spawnOnce "barrier --config /home/trey/barrier/barrier.conf"
+        spawnOnce "cadmus &"
+        spawnOnce "steam &"
+        spawnOnce "nitrogen --restore &"
 
 -- Main --
 
 main :: IO ()
 main = do
   xmproc0 <- spawnPipe "xmobar -x 0 /home/trey/.config/xmobar/xmobarrc"
-  xmonad $ docks def
+  xmonad $ ewmh $ docks $ def
         {
       -- Defining Things --
         terminal           = myTerminal,

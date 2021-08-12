@@ -6,7 +6,7 @@
      %slot-default%
      (cl-css:css
       '((body
-         :background-color "black"
+         :background-color "#282C34"
          :color "white")))))))
 
 (define-configuration prompt-buffer
@@ -14,22 +14,21 @@
            %slot-default%
            (cl-css:css
             '((body
-               :background-color "black"
+               :background-color "#282C34"
                :color "white")
               ("#prompt-area"
-               :background-color "black")
+               :background-color "#282C34")
               ("#input"
-               :background-color "white")
+               :background-color "2C2D30")
               (".source-name"
-               :color "black"
-               :background-color "#556B2F")
+               :color "#BBC2CF"
+               :background-color "#282C34")
               (".source-content"
-               :background-color "black")
+               :background-color "#282C34")
               (".source-content th"
-               :border "1px solid #556B2F"
-               :background-color "black")
+               :background-color "#282C34")
               ("#selection"
-               :background-color "#CD5C5C"
+               :background-color "#51AFEF"
                :color "black")
               (.marked :background-color "#8B3A3A"
                        :font-weight "bold"
@@ -43,9 +42,9 @@
      %slot-default%
      (cl-css:css
       '((title
-         :color "#CD5C5C")
+         :color "#282C34")
         (body
-         :background-color "black"
+         :background-color "#282C34"
          :color "lightgray")
         (hr
          :color "darkgray")

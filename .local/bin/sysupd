@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-paru -Syu --noconfirm
+paru -Syu
 rustup update
 doom sync
 doom upgrade

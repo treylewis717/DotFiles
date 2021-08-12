@@ -2,7 +2,7 @@
 set fish_greeting
 set TERM "alacritty"
 set EDITOR "nvim"
-set -gx PATH "/home/trey/android-platform-tools:/home/trey/.cargo/bin/:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
+set -gx PATH "/home/trey/Qt/Tools/QtCreator/bin/:/home/trey/android-platform-tools:/home/trey/.cargo/bin/:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH"
 set -gx RUST_BACKTRACE 1
 
 ### ALIASES

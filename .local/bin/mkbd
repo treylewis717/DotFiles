@@ -1,5 +1,21 @@
 #!/bin/bash
 
+usage() {
+    printf "%s" "\
+mkbd <options> [file] [drive]
+
+usage:
+    -h, --help          print this menu
+
+"
+    exit 0
+}
+
+if [[ $1 == "-h" || $1 == "--help" ]]
+then
+    usage
+fi
+
 # Checking if user is root
 if [[ ! $USER = "root" ]]
 then
@@ -7,39 +23,49 @@ then
     exit 0
 fi
 
-echo -e "Input: "
+incorrect() {
+    printf "%s" "\
+Please provide the correct args
 
-read inf
+mkbd <options> [file] [drive]
 
-inf="$DIR/$inf"
+"
+    exit 0
+}
 
-echo -e "Output: "
+if [[ -z $1 ]]
+then
+    incorrect
+fi
 
-read outf
+if
+
+if [[ -z $2 ]]
+then
+    incorrect
+fi
 
 # Asking user if output is a drive
-echo -e "Is Output a drive [y/n]: "
-
-read drivebool
+read -p "Is Output a drive [y/n]: " drivebool
 
 # Checking user's answer
 if [[ $drivebool == "y" || $drivebool == "Y" || $drivebool == "yes" || $drivebool == "Yes" ]]
 then
     echo "Output is drive"
     echo "Unmounting drive as precaution"
-    umount $outf
+    umount $2
     echo "Unmount complete"
     echo "Formatting drive..."
-    mkfs.ext4 $outf
+    mkfs.ext4 $2
     echo "Formatting Complete"
     echo "Writing to drive"
-    dd if=$inf of=$outf status='progress'
+    dd if=$1 of=$2 status='progress'
     echo "Write Complete"
     echo "Exiting..."
 elif [[ $drivebool == "n" || $drivebool == "N" || $drivebool == "no" || $drivebool == "No" ]]
 then
     echo "Output is not drive"
-    dd if=$inf of=$outf status='progress'
+    dd if=$1 of=$2 status='progress'
 else
     echo "Invalid Response"
     echo "Exiting..."
