@@ -38,8 +38,6 @@ then
     incorrect
 fi
 
-if
-
 if [[ -z $2 ]]
 then
     incorrect

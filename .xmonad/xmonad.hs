@@ -50,6 +50,7 @@ import XMonad.Layout.Renamed
 import XMonad.Layout.ShowWName
 import XMonad.Layout.Simplest
 import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.WindowNavigation
 import qualified XMonad.Layout.ToggleLayouts as T
@@ -133,10 +134,12 @@ myKeys =
          , ("M-S-c", kill1)
          -- start emacs --
          , ("M-S-e e", spawn myEditor)
+         -- start emacs everywhere
+         , ("M-e", spawn "emacsclient --eval '(emacs-everywhere)'")
          -- start mu4e --
-         , ("M-S-e m", spawn (myEditor ++ "--eval '(mu4e)'"))
+         , ("M-S-e m", spawn "emacsclient --eval '(mu4e)'")
          -- start dired --
-         , ("M-S-e d", spawn (myEditor ++ "--eval '(dired nil)'"))
+         , ("M-S-e d", spawn "emacsclient --eval '(dired nil)'")
          -- close all windows in focused workspace --
          , ("M-S-a", killAll)
          -- change to next layout --
@@ -168,6 +171,8 @@ myKeys =
          , ("M-S-q", io exitSuccess)
          -- restart xmonad --
          , ("M-q", spawn "xmonad --recompile; xmonad --restart")
+         -- autoclick
+         , ("M-S-<Insert>", spawn "cautoclick")
          -- multimedia keys --
          , ("<XF86AudioStop>", spawn "playerctl -p spotify stop")
          , ("<XF86AudioPlay>", spawn "playerctl -p spotify play-pause")
@@ -306,7 +311,9 @@ tall    = renamed [Replace "tall"]
           $ mySpacing 4
           $ ResizableTall 1 (3/100) (1/2) []
 monocle = renamed [Replace "monocle"]
+          $ smartBorders
           $ windowNavigation
+          $ subLayout [] (smartBorders Simplest)
           $ limitWindows 20 Full
 grid    = renamed [Replace "grid"]
           $ windowNavigation
@@ -332,14 +339,12 @@ myManageHook = composeAll
     , className =? "Steam"              --> doShift ( myWorkspaces !! 2 )
     , className =? "lbry"               --> doShift ( myWorkspaces !! 3 )
     , className =? "VirtualBox Manager" --> doShift ( myWorkspaces !! 4 )
-    , className =? "emacs"              --> doShift
     , resource  =? "desktop_window"     --> doIgnore ]
 
 -- Event Handling --
 
 spotifyEventHook:: Event -> X All
 spotifyEventHook = dynamicPropertyChange "WM_NAME" (className =? "Spotify" --> doShift ( myWorkspaces !! 1 ))
-
 
 myEventHook:: Event -> X All
 myEventHook = handleEventHook def <+> spotifyEventHook <+> fullscreenEventHook <+> ewmhDesktopsEventHook
@@ -367,6 +372,7 @@ myStartupHook = do
         spawnOnce "cadmus &"
         spawnOnce "steam &"
         spawnOnce "nitrogen --restore &"
+        spawnOnce "play-with-mpv &"
 
 -- Main --
 

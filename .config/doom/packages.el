@@ -49,10 +49,11 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package! evil-tutor)
+;; (package! evil-tutor)
 (package! elcord)
 (package! org-bullets)
 (package! dired-open)
 (package! peep-dired)
 (package! emojify)
-(package! pianobar)
+(package! exwm)
+(package! find-file-in-project)

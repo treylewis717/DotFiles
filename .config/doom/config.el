@@ -1,3 +1,5 @@
+(setq warning-minimum-level :emergency)
+
 (setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
       doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
 (after! doom-themes
@@ -8,14 +10,58 @@
   '(font-lock-keyword-face :slant italic))
 (setq global-prettify-symbols-mode t)
 
+(after! neotree
+  (setq neo-smart-open t
+        neo-window-fixed-size nil))
+
+(after! doom-themes
+  (setq doom-neotree-enable-variable-pitch t))
+
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (ffip-project-root))
+        (file-name (buffer-file-name)))
+    (if project-dir
+        (progn
+          (neotree-dir project-dir)
+          (neotree-find file-name))
+      (message "Could not find git project root."))))
+
+(map! :leader
+      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
+      :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
+      :desc "Open directory in neotree" "d n" #'neotree-dir)
+(after! )
+(neotree)
+
+(global-unset-key (kbd "SPC ."))
+
+(add-hook! '+doom-dashboard-functions :append
+           (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Yay evil!")))
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
+
 (setq doom-theme 'doom-one)
 
 (setq display-line-numbers-type t)
 
-(require 'elcord)
-(setq elcord-mode t)
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist (0 "HDMI-0"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-commands
+             "xrandr" nil "xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate-normal")))
+(exwm-randr-enable)
+(require 'exwm-systemtray)
+(exwm-systemtray-enable)
 
-(+word-wrap-mode)
+(require 'elcord)
+(elcord-mode)
+(setq elcord-use-major-mode-as-main-icon 't)
+;; (setq elcord-show-small-icon 'nil)
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
@@ -36,6 +82,11 @@
             ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
             ("ddg" . "https://duckduckgo.com/?q=")
             ("wiki" . "https://en.wikipedia.org/wiki/"))))
+
+
+
+(fset 'xml-mode 'nxml-mode)
+(add-to-list 'auto-mode-alist '("\\.ui\\'" . nxml-mode))
 
 (evil-define-key 'normal dired-mode-map
   (kbd "h") 'dired-up-directory

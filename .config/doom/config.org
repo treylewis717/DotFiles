@@ -6,6 +6,12 @@ Doom Emacs is a distrobution of GNU Emacs that brings speed improvements and eas
 
 Official Documentation: https://github.com/hlissner/doom-emacs/blob/develop/docs/index.org
 
+* Warnings
+Disables warnings and only shows errors
+#+begin_src emacs-lisp
+(setq warning-minimum-level :emergency)
+#+end_src
+
 * Fonts
 Sets the font and changes a few settings for visual improvements.
 
@@ -19,6 +25,52 @@ Sets the font and changes a few settings for visual improvements.
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 (setq global-prettify-symbols-mode t)
+#+end_src
+
+* NeoTree
+Enable the neotree file viewer.
+
+#+begin_src emacs-lisp
+(after! neotree
+  (setq neo-smart-open t
+        neo-window-fixed-size nil))
+
+(after! doom-themes
+  (setq doom-neotree-enable-variable-pitch t))
+
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (ffip-project-root))
+        (file-name (buffer-file-name)))
+    (if project-dir
+        (progn
+          (neotree-dir project-dir)
+          (neotree-find file-name))
+      (message "Could not find git project root."))))
+
+(map! :leader
+      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
+      :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
+      :desc "Open directory in neotree" "d n" #'neotree-dir)
+(after! )
+(neotree)
+#+end_src
+
+* Bug Fixes
+Had a couple of issues with ido-find-file and it's keybind, so this fixes it.
+
+#+begin_src emacs-lisp
+(global-unset-key (kbd "SPC ."))
+#+end_src
+
+* Dashboard
+Changes the dashboard a little bit
+
+#+begin_src emacs-lisp
+(add-hook! '+doom-dashboard-functions :append
+           (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Yay evil!")))
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
 #+end_src
 
 * Theme
@@ -35,19 +87,32 @@ Enables line numbers.
 (setq display-line-numbers-type t)
 #+end_src
 
+* EXWM
+A window manager for emacs
+
+#+begin_src emacs-lisp
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist (0 "HDMI-0"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-commands
+             "xrandr" nil "xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate-normal")))
+(exwm-randr-enable)
+(require 'exwm-systemtray)
+(exwm-systemtray-enable)
+#+end_src
+
 * Elcord
 Elcord is a plugin that enables Discord rich presence for Emacs.
 
 #+begin_src emacs-lisp
 (require 'elcord)
-(setq elcord-mode t)
-#+end_src
-
-* Word Wrap
-Enables Word Wrap.
-
-#+begin_src emacs-lisp
-(+word-wrap-mode)
+(elcord-mode)
+(setq elcord-use-major-mode-as-main-icon 't)
+;; (setq elcord-show-small-icon 'nil)
 #+end_src
 
 * Rust
@@ -78,6 +143,52 @@ Sets settings for org-mode such as the directory, the org-agenda file, the journ
             ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
             ("ddg" . "https://duckduckgo.com/?q=")
             ("wiki" . "https://en.wikipedia.org/wiki/"))))
+#+end_src
+
+* Emacs Everywhere
+Sets up emacs-everywhere which allows you to use emacs in place of a standard text editor in a web site for example.
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+* Flutter/Dart
+Sets up dart mode and usage of flutter
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :hook (dart-mode . lsp)
+  :commands lsp)
+
+(add-hook 'dart-mode-hook 'lsp)
+(with-eval-after-load "projectile"
+  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
+
+(setq lsp-auto-guess-root t)
+
+(use-package dart-mode
+  :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
+  :hook (dart-mode . (lambda ()
+                      (add-hook 'after-save-hook #'flutter-run-or-hot-reload nil t)))
+  :custom
+  (dart-format-on-save t)
+  (dart-sdk-path "/Users/sashnortier/Desktop/Code/flutter/bin/cache/dart-sdk/"))
+
+(use-package flutter
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload))
+  :custom
+  (flutter-sdk-path "/home/trey/Programming/SDKs/flutter/"))
+#+end_src emacs-lisp
+
+* XML/UI
+Sets up nxml-mode and adds functionality for *.ui files
+
+#+begin_src emacs-lisp
+(fset 'xml-mode 'nxml-mode)
+(add-to-list 'auto-mode-alist '("\\.ui\\'" . nxml-mode))
 #+end_src
 
 * Dired

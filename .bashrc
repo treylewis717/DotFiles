@@ -5,7 +5,7 @@
 ### EXPORT
 export TERM="alacritty"
 export EDITOR="nvim"
-export PATH=/home/trey/android-platform-tools:/home/trey/.cargo/bin:/home/trey/.emacs.d/bin:/home/trey/.local/bin:$PATH
+export PATH=/home/trey/android-platform-tools:/home/trey/.cargo/bin:/home/trey/.emacs.d/bin:/home/trey/.local/bin:/home/trey/Programming/SDKs/flutter/bin:$PATH
 
 ### ALIASES
 

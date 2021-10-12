@@ -15,7 +15,6 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                     , Run Memory ["-t","<fn=1> </fn> Memory: (<usedratio>%)"] 10
                     , Run Com "uname" ["-s","-r"] "" 3600
 		    , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 2000
-		    , Run Com "/home/trey/.local/bin/getorphans" [] "orphanpkgs" 2000
 		    , Run Com "/home/trey/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
                     , Run Date "<fn=1> </fn> %A, %B %_d, %Y" "date" 10
                     , Run Date "<fn=1> </fn> %H:%M:%S" "time" 10
@@ -23,5 +22,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <action=`xdotool key control+alt+g`><icon=haskell_20.xpm/> </action><fc=#666666>|</fc>%UnsafeStdinReader% }{ <fc=#EC0000><fn=1> </fn> %uname% </fc> <fc=#666666>|</fc> <fc=#00EC00> %cpu% </fc> <fc=#666666>|</fc> <fc=#0000EC> %memory% </fc> <fc=#666666>|</fc> <fc=#C800C8> %wlan0% </fc> <fc=#666666>|</fc> <fc=#00CBFF> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#666666>|</fc> <fc=#786AE0> <fn=1> </fn> %orphanpkgs% </fc> <fc=#666666>|</fc> <fc=#EEC800>%date%</fc> <fc=#666666>|</fc> <fc=#F26F00>%time%</fc> <fc=#666666>|</fc> %trayerpad%"
+       , template = " <action=`xdotool key control+alt+g`><icon=haskell_20.xpm/> </action><fc=#666666>|</fc>%UnsafeStdinReader% }{ <fc=#EC0000><fn=1> </fn> %uname% </fc> <fc=#666666>|</fc> <fc=#00EC00> %cpu% </fc> <fc=#666666>|</fc> <fc=#0000EC> %memory% </fc> <fc=#666666>|</fc> <fc=#C800C8> %wlan0% </fc> <fc=#666666>|</fc> <fc=#00CBFF> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#666666>|</fc> <fc=#EEC800>%date%</fc> <fc=#666666>|</fc> <fc=#F26F00>%time%</fc> <fc=#666666>|</fc> %trayerpad%"
        }
