@@ -5,6 +5,7 @@ set EDITOR "nvim"
 set -gx PATH "/home/trey/Qt/Tools/QtCreator/bin/:/home/trey/android-platform-tools:/home/trey/.cargo/bin/:/home/trey/.emacs.d/bin:/home/trey/.local/bin:/home/trey/Programming/SDKs/flutter/bin:/home/trey/MultiMC/bin:$PATH"
 set -gx RUST_BACKTRACE 1
 set -gx CHROME_EXECUTABLE "/usr/bin/google-chrome-stable"
+[ -f "/home/trey/.ghcup/env" ] && source "/home/trey/.ghcup/env" # ghcup-env
 
 ### ALIASES
 

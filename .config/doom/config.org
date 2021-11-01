@@ -53,15 +53,8 @@ Enable the neotree file viewer.
       :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
       :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
       :desc "Open directory in neotree" "d n" #'neotree-dir)
-(after! )
-(neotree)
-#+end_src
-
-* Bug Fixes
-Had a couple of issues with ido-find-file and it's keybind, so this fixes it.
-
-#+begin_src emacs-lisp
-(global-unset-key (kbd "SPC ."))
+(after! doom-dashboard-init-h
+  (neotree))
 #+end_src
 
 * Dashboard
@@ -85,24 +78,6 @@ Enables line numbers.
 
 #+begin_src emacs-lisp
 (setq display-line-numbers-type t)
-#+end_src
-
-* EXWM
-A window manager for emacs
-
-#+begin_src emacs-lisp
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
-(require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist (0 "HDMI-0"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-commands
-             "xrandr" nil "xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate-normal")))
-(exwm-randr-enable)
-(require 'exwm-systemtray)
-(exwm-systemtray-enable)
 #+end_src
 
 * Elcord
@@ -211,7 +186,7 @@ Some options for the built-in file manager.
 #+end_src
 
 * mu4e
-Enables mu4e. My emails are contained in a seperate file for privacy reasons.
+Enables mu4e. My email addresses are contained in a seperate file for privacy reasons.
 
 #+begin_src emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
@@ -236,6 +211,14 @@ Enables mu4e. My emails are contained in a seperate file for privacy reasons.
       (error "No email account found"))))
 
 (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
+#+end_src
+
+* Haskell Mode
+Enables haskell-mode
+
+#+begin_src emacs-lisp
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
 #+end_src
 
 * Emojis

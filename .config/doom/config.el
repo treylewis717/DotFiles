@@ -32,10 +32,8 @@
       :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
       :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
       :desc "Open directory in neotree" "d n" #'neotree-dir)
-(after! )
-(neotree)
-
-(global-unset-key (kbd "SPC ."))
+(after! doom-dashboard-init-h
+  (neotree))
 
 (add-hook! '+doom-dashboard-functions :append
            (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Yay evil!")))
@@ -44,19 +42,6 @@
 (setq doom-theme 'doom-one)
 
 (setq display-line-numbers-type t)
-
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
-(require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist (0 "HDMI-0"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-commands
-             "xrandr" nil "xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate-normal")))
-(exwm-randr-enable)
-(require 'exwm-systemtray)
-(exwm-systemtray-enable)
 
 (require 'elcord)
 (elcord-mode)
@@ -124,6 +109,9 @@
       (error "No email account found"))))
 
 (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
+
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
 
 (use-package emojify
   :hook (after-init . global-emojify-mode))

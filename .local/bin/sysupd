@@ -5,3 +5,4 @@ rustup update
 doom sync
 doom upgrade
 paru -Rns $(paru -Qtdq)
+~/.xmonad/update.sh

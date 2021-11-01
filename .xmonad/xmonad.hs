@@ -28,7 +28,7 @@ import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.DynamicProperty (dynamicPropertyChange)
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsEventHook, ewmhDesktopsStartup, fullscreenEventHook)
+import XMonad.Hooks.EwmhDesktops
 
   -- Util --
 import XMonad.Util.EZConfig (additionalKeysP)
@@ -347,7 +347,7 @@ spotifyEventHook:: Event -> X All
 spotifyEventHook = dynamicPropertyChange "WM_NAME" (className =? "Spotify" --> doShift ( myWorkspaces !! 1 ))
 
 myEventHook:: Event -> X All
-myEventHook = handleEventHook def <+> spotifyEventHook <+> fullscreenEventHook <+> ewmhDesktopsEventHook
+myEventHook = handleEventHook def <+> spotifyEventHook
 
 -- Logging --
 
@@ -379,7 +379,7 @@ myStartupHook = do
 main :: IO ()
 main = do
   xmproc0 <- spawnPipe "xmobar -x 0 /home/trey/.config/xmobar/xmobarrc"
-  xmonad $ ewmh $ docks $ def
+  xmonad $ ewmh . docks $ def
         {
       -- Defining Things --
         terminal           = myTerminal,
