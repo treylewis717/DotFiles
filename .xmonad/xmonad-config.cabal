@@ -24,6 +24,7 @@ library
       ./
   build-depends:
       base
+    , xmobar >=0.40
     , xmonad >=0.17.0
     , xmonad-contrib >=0.17.0
   default-language: Haskell2010

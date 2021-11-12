@@ -1,25 +1,30 @@
 #+TITLE: Setup
 #+AUTHOR: Trey Lewis (TL)
 
-Install stack via ghcup
+Install stack and cabal-install via ghcup
 #+begin_example
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+$ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 #+end_example
 
 Next, install xmonad and xmobar
 #+begin_example
-stack install xmonad xmobar
+$ stack install xmonad
+$ stack install --flag xmobar:all_extensions --flag xmobar:with_xft xmobar
 #+end_example
 
 Also confirm that ~/.local/bin is in your path by running:
 #+begin_example
-echo $PATH
+$ echo $PATH
 #+end_example
 
-Install xmonad as a lib by running:
+Install dependencies by running:
 #+begin_example
-cd ~/.xmonad
-stack build
+$ cd ~/.xmonad
+$ cabal install happy
+$ stack build
 #+end_example
 
 Finally, copy xmonad.desktop to /usr/share/xsessions/
+#+begin_example
+$ sudo cp ~/.xmonad/xmonad.desktop /usr/share/xsessions/
+#+end_example

@@ -1,5 +1,6 @@
 Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true"
        , additionalFonts = ["xft: RobotoMono Nerd Font:weight=bold:pixelsize=12:antialias=true:hinting=true"]
+
        , bgColor = "#282c34"
        , fgColor = "#ffffff"
        , position = Static { xpos = 0, ypos = 0, width = 1920, height = 24 }
@@ -14,8 +15,8 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                                "--normal","green","--high","red"] 10
                     , Run Memory ["-t","<fn=1> </fn> Memory: (<usedratio>%)"] 10
                     , Run Com "uname" ["-s","-r"] "" 3600
-		    , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 2000
-		    , Run Com "/home/trey/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
+	            , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 2000
+		    , Run Com "/home/trey/.xmonad/trayer-padding-icon.sh" [] "trayerpad" 20
                     , Run Date "<fn=1> </fn> %A, %B %_d, %Y" "date" 10
                     , Run Date "<fn=1> </fn> %H:%M:%S" "time" 10
                     , Run UnsafeStdinReader

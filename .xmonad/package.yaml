@@ -9,6 +9,7 @@ dependencies:
   - base
   - xmonad >= 0.17.0
   - xmonad-contrib >= 0.17.0
-
+  - xmobar >= 0.40
+    
 library:
   source-dirs: .
