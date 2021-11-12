@@ -1,7 +1,7 @@
 # ~/.xmonad/build
 #!/bin/sh
-cd /home/trey/.xmonad
-exec /home/trey/.ghcup/bin/stack ghc -- \
+cd ~/.xmonad
+exec ~/.ghcup/bin/stack ghc -- \
   --make xmonad.hs \
   -i \
   -ilib \
