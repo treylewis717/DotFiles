@@ -1,7 +1,6 @@
-#+TITLE: Readme
+#+TITLE: Setup
 #+AUTHOR: Trey Lewis (TL)
 
-* Setup
 Install stack via ghcup
 #+begin_example
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
