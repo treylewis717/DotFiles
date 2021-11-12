@@ -379,7 +379,7 @@ myStartupHook = do
 main :: IO ()
 main = do
   xmproc0 <- spawnPipe "xmobar -x 0 /home/trey/.config/xmobar/xmobarrc"
-  xmonad $ ewmh . docks $ def
+  xmonad $ ewmhFullscreen . ewmh . docks $ def
         {
       -- Defining Things --
         terminal           = myTerminal,

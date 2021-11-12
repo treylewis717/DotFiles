@@ -6,12 +6,6 @@ Doom Emacs is a distrobution of GNU Emacs that brings speed improvements and eas
 
 Official Documentation: https://github.com/hlissner/doom-emacs/blob/develop/docs/index.org
 
-* Warnings
-Disables warnings and only shows errors
-#+begin_src emacs-lisp
-(setq warning-minimum-level :emergency)
-#+end_src
-
 * Fonts
 Sets the font and changes a few settings for visual improvements.
 
@@ -27,8 +21,45 @@ Sets the font and changes a few settings for visual improvements.
 (setq global-prettify-symbols-mode t)
 #+end_src
 
+* EXWM
+Config for the Emacs X Window Manager
+
+#+begin_src emacs-lisp
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (setq exwm-input-global-keys
+      ;; `(([?\s-q] . exwm-reset)
+        ;; ,@(mapcar (lambda (i)
+                    ;; `(,(kbd (format "s-%d" i)) .
+                      ;; (lambda ()
+                        ;; (interactive)
+                        ;; (exwm-workspace-switch-create ,i))))
+                  ;; (number-sequence 0 9))
+        ;; ([?\s-<return>] . (lambda ()
+                            ;; (interactive)
+                            ;; (start-process "" nil "/usr/bin/alacritty -e fish"))))
+
+;; (define-key exwm-mode-map [?\s-t] 'exwm-floating-toggle-floating)
+
+;; (require 'exwm-systemtray)
+;; (exwm-systemtray-enable)
+
+;; (setq exwm-workspace-number 6)
+
+;; (exwm-enable)
+#+end_src
+
+* PKGBUILD
+Enables the pkgbuild major mode.
+
+#+begin_src emacs-lisp
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode))
+                              auto-mode-alist))
+#+end_src
+
 * NeoTree
-Enable the neotree file viewer.
+Enables the neotree file viewer.
 
 #+begin_src emacs-lisp
 (after! neotree

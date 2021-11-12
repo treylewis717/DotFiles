@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-paru -Syu
 rustup update
 doom sync
 doom upgrade
+read -p "Would you like to update XMonad: [y/N] " updatexmonad
+
+if [[ $updatexmonad == "y" || $updatexmonad == "Y" || $updatexmonad == "yes" || $updatexmonad == "Yes" ]]
+then
+    ~/.xmonad/update.sh
+fi
+paru -Syu
 paru -Rns $(paru -Qtdq)
-~/.xmonad/update.sh

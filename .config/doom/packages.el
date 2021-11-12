@@ -57,3 +57,4 @@
 (package! emojify)
 (package! exwm)
 (package! find-file-in-project)
+(package! pkgbuild-mode)

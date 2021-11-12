@@ -1,5 +1,3 @@
-(setq warning-minimum-level :emergency)
-
 (setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
       doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
 (after! doom-themes
@@ -9,6 +7,33 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 (setq global-prettify-symbols-mode t)
+
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (setq exwm-input-global-keys
+      ;; `(([?\s-q] . exwm-reset)
+        ;; ,@(mapcar (lambda (i)
+                    ;; `(,(kbd (format "s-%d" i)) .
+                      ;; (lambda ()
+                        ;; (interactive)
+                        ;; (exwm-workspace-switch-create ,i))))
+                  ;; (number-sequence 0 9))
+        ;; ([?\s-<return>] . (lambda ()
+                            ;; (interactive)
+                            ;; (start-process "" nil "/usr/bin/alacritty -e fish"))))
+
+;; (define-key exwm-mode-map [?\s-t] 'exwm-floating-toggle-floating)
+
+;; (require 'exwm-systemtray)
+;; (exwm-systemtray-enable)
+
+;; (setq exwm-workspace-number 6)
+
+;; (exwm-enable)
+
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode))
+                              auto-mode-alist))
 
 (after! neotree
   (setq neo-smart-open t

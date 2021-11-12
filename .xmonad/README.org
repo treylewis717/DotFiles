@@ -2,46 +2,25 @@
 #+AUTHOR: Trey Lewis (TL)
 
 * Setup
-Clone these repos in .xmonad
-#+begin_example
-git clone "https://github.com/xmonad/xmonad" xmonad-git
-git clone "https://github.com/xmonad/xmonad-contrib" xmonad-contrib-git
-git clone "https://github.com/jaor/xmobar" xmobar-git
-#+end_example
-
 Install stack via ghcup
 #+begin_example
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 #+end_example
 
-Inside .xmonad run
+Next, install xmonad and xmobar
 #+begin_example
-stack init
+stack install xmonad xmobar
 #+end_example
 
-Replace the contents of stack.yaml with
-#+begin_src yaml
-resolver:
-  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/14.yaml
-packages:
-- xmobar-git
-- xmonad-git
-- xmonad-contrib-git
-extra-deps:
-  - iwlib-0.1.0
-  - netlink-1.1.1.0@sha256:d83424b5ba9921191449e4b1f53c7cba7f4375f2c55a9b737c77e982e1f40d00,3689
-flags:
-  xmobar:
-    all_extensions: true
-#+end_src
-
-Run update.sh
-
-Next, confirm that ~/.local/bin is in your path by running:
+Also confirm that ~/.local/bin is in your path by running:
 #+begin_example
 echo $PATH
 #+end_example
 
-Finally, copy xmonad.desktop to //usr/share/xsessions./
+Install xmonad as a lib by running:
+#+begin_example
+cd ~/.xmonad
+stack build
+#+end_example
 
-Don't forget to occasionally run update.sh to update xmonad.
+Finally, copy xmonad.desktop to /usr/share/xsessions/

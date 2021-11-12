@@ -1,0 +1,14 @@
+name: xmonad-config
+synopsis: My config for XMonad and XMobar
+description: My config for XMonad and XMobar
+author: Trey Lewis <tldesktopenvironment@gmail.com>
+git: https://gitlab.com/SuperMrDoggyDog/dotfiles
+category: Configuration
+
+dependencies:
+  - base
+  - xmonad >= 0.17.0
+  - xmonad-contrib >= 0.17.0
+
+library:
+  source-dirs: .
