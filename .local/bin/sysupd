@@ -1,13 +1,27 @@
 #!/usr/bin/env bash
 
+echo ""
+echo "--- Rust ---"
 rustup update
-doom sync
-doom upgrade
-read -p "Would you like to update XMonad: [y/N] " updatexmonad
+echo "--- End Rust ---"
 
-if [[ $updatexmonad == "y" || $updatexmonad == "Y" || $updatexmonad == "yes" || $updatexmonad == "Yes" ]]
-then
-    ~/.xmonad/update.sh
-fi
-paru -Syu
+# echo ""
+# echo "--- Doom Emacs ---"
+# doom sync
+# doom upgrade
+# echo "--- End Doom Emacs ---"
+
+echo ""
+echo "--- Flatpak ---"
+flatpak update
+echo "--- End Flatpak ---"
+
+echo ""
+echo "--- System ---"
+paru -Syyu
+echo "--- End System ---"
+
+echo ""
+echo "--- System Clean ---"
 paru -Rns $(paru -Qtdq)
+echo "--- End System Clean ---"
