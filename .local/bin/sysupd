@@ -5,11 +5,11 @@ echo "--- Rust ---"
 rustup update
 echo "--- End Rust ---"
 
-# echo ""
-# echo "--- Doom Emacs ---"
-# doom sync
-# doom upgrade
-# echo "--- End Doom Emacs ---"
+echo ""
+echo "--- Doom Emacs ---"
+doom sync
+doom upgrade
+echo "--- End Doom Emacs ---"
 
 echo ""
 echo "--- Flatpak ---"

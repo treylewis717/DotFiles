@@ -1,30 +1,56 @@
 #+TITLE: TL Doom Emacs Config
 #+PROPERTY: header-args :tangle config.el
 
-* Doom Emacs Config
-Doom Emacs is a distrobution of GNU Emacs that brings speed improvements and ease of use to the table which are things GNU Emacs lacks.
-
-Official Documentation: https://github.com/hlissner/doom-emacs/blob/develop/docs/index.org
-
-* Fonts
-Sets the font and changes a few settings for visual improvements.
+* Dashboard
+Changes the dashboard a little bit
 
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
-      doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
-(after! doom-themes
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
-(setq global-prettify-symbols-mode t)
+(add-hook! '+doom-dashboard-functions :append
+           (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Yay evil!")))
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
+#+end_src
+
+* Dired
+Some options for the built-in file manager.
+
+#+begin_src emacs-lisp
+(evil-define-key 'normal dired-mode-map
+  (kbd "h") 'dired-up-directory
+  (kbd "l") 'dired-open-file)
+(evil-define-key 'normal peep-dired-mode-map
+  (kbd "j") 'peep-dired-next-file
+  (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(setq dired-open-extensions '(("gif" . "sxiv")
+                              ("jpg" . "sxiv")
+                              ("png" . "sxiv")
+                              ("mkv" . "mpv")
+                              ("mp4" . "mpv")))
+#+end_src
+
+* Elcord
+Elcord is a plugin that enables Discord rich presence for Emacs.
+
+#+begin_src emacs-lisp
+(elcord-mode)
+(setq elcord-use-major-mode-as-main-icon 't)
+(setq elcord-display-elasped nil)
+(setq elcord-quiet 't)
+(setq elcord-show-small-icon 'nil)
+#+end_src
+
+* Emacs Everywhere
+Sets up emacs-everywhere which allows you to use emacs in place of a standard text editor in a web site for example.
+
+#+begin_src emacs-lisp
+
 #+end_src
 
 * EXWM
 Config for the Emacs X Window Manager
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisP
 ;; (require 'exwm)
 ;; (require 'exwm-config)
 ;; (setq exwm-input-global-keys
@@ -49,13 +75,129 @@ Config for the Emacs X Window Manager
 ;; (exwm-enable)
 #+end_src
 
-* PKGBUILD
+* Language Support
+** Flutter/Dart
+Sets up dart mode and usage of flutter
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :hook (dart-mode . lsp)
+  :commands lsp)
+
+(add-hook 'dart-mode-hook 'lsp)
+(with-eval-after-load "projectile"
+  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
+
+(setq lsp-auto-guess-root t)
+
+(use-package dart-mode
+  :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
+  :hook (dart-mode . (lambda ()
+                      (add-hook 'after-save-hook #'flutter-run-or-hot-reload nil t)))
+  :custom
+  (dart-format-on-save t)
+  (dart-sdk-path "/Users/sashnortier/Desktop/Code/flutter/bin/cache/dart-sdk/"))
+
+(use-package flutter
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload))
+  :custom
+  (flutter-sdk-path "/home/trey/Programming/SDKs/flutter/"))
+#+end_src emacs-lisp
+
+** Haskell Mode
+Enables haskell-mode
+
+#+begin_src emacs-lisp
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
+#+end_src
+
+** Org
+Sets settings for org-mode such as the directory, the org-agenda file, the journal directory, etc.
+
+#+begin_src emacs-lisp
+(after! org
+  (setq org-directory "~/Org/"
+        org-agenda-files '("~/Org/agenda.org")
+        org-default-notes-file (expand-file-name "notes.org" org-directory)
+        org-ellipsis " ▼ "
+        org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+        org-superstar-item-bullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
+        org-log-done 'time
+        org-journal-dir "~/Org/journal/"
+        org-journal-date-format "%B %d, %Y (%A) "
+        org-journal-file-format "%Y-%m-%d.org"
+        org-hide-emphasis-markers t
+        org-link-abbrev-alist
+          '(("google" . "http://www.google.com/search?q=")
+            ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
+            ("ddg" . "https://duckduckgo.com/?q=")
+            ("wiki" . "https://en.wikipedia.org/wiki/")))
+  (setq org-src-preserve-indentation nil
+       org-src-tab-acts-natively t
+       org-edit-src-content-indentation 0)
+  (setq org-blank-before-new-entry (quote ((heading . nil)
+                                          (plain-list-item . nil))))
+  (setq org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      org-confirm-babel-evaluate nil
+      org-edit-src-content-indentation 0))
+#+end_src
+
+** PKGBUILD
 Enables the pkgbuild major mode.
 
 #+begin_src emacs-lisp
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode))
                               auto-mode-alist))
+#+end_src
+
+** Rust
+Enables rust-mode when editing a *.rs file.
+
+#+begin_src emacs-lisp
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
+#+end_src
+
+** XML/UI
+Sets up nxml-mode and adds functionality for *.ui files
+
+#+begin_src emacs-lisp
+(fset 'xml-mode 'nxml-mode)
+(add-to-list 'auto-mode-alist '("\\.ui\\'" . nxml-mode))
+#+end_src
+
+* mu4e
+Enables mu4e. My email addresses are contained in a seperate file for privacy reasons.
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(load "~/.config/doom/email")
+(defun my-mu4e-set-account ()
+  "Set the account for composing a message."
+  (let* ((account
+          (if mu4e-compose-parent-message
+              (let ((maildir (mu4e-message-field mu4e-compose-parent-message :maildir)))
+                (string-match "/\\(.*?\\)/" maildir)
+                (match-string 1 maildir))
+            (completing-read (format "Compose with account: (%s) "
+                                     (mapconcat #'(lambda (var) (car var))
+                                                my-mu4e-account-alist "/"))
+                             (mapcar #'(lambda (var) (car var)) my-mu4e-account-alist)
+                             nil t nil nil (caar my-mu4e-account-alist))))
+         (account-vars (cdr (assoc account my-mu4e-account-alist))))
+    (if account-vars
+        (mapc #'(lambda (var)
+                  (set (car var) (cadr var)))
+              account-vars)
+      (error "No email account found"))))
+
+(add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
 #+end_src
 
 * NeoTree
@@ -88,173 +230,59 @@ Enables the neotree file viewer.
   (neotree))
 #+end_src
 
-* Dashboard
-Changes the dashboard a little bit
+* Theme
+** Fonts
+Sets the font and changes a few settings for visual improvements.
 
 #+begin_src emacs-lisp
-(add-hook! '+doom-dashboard-functions :append
-           (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Yay evil!")))
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
+(setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
+      doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+(setq global-prettify-symbols-mode t)
 #+end_src
 
-* Theme
+** doom-one theme
 Sets the theme.
 
 #+begin_src emacs-lisp
 (setq doom-theme 'doom-one)
 #+end_src
 
-* Line Numbers
+** Disable fringes
+#+begin_src emacs-lisp
+(lambda () (interactive) (fringe-mode "no-fringes"))
+#+end_src
+
+** Line Numbers
 Enables line numbers.
 
 #+begin_src emacs-lisp
 (setq display-line-numbers-type t)
 #+end_src
 
-* Elcord
-Elcord is a plugin that enables Discord rich presence for Emacs.
-
+** Dashboard
 #+begin_src emacs-lisp
-(require 'elcord)
-(elcord-mode)
-(setq elcord-use-major-mode-as-main-icon 't)
-;; (setq elcord-show-small-icon 'nil)
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+(setq dashboard-banner-logo-title "Emacs is More Than A Text Editor!")
+(setq dashboard-startup-banner 'logo)
+(setq dashboard-center-content t)
+(setq dashboard-items '((recents . 10)
+                        (agenda . 5)
+                        (projects . 5)))
+
+(dashboard-setup-startup-hook)
+(dashboard-modify-heading-icons '((recents . "file-text")
+                                 (bookmarks . "book")))
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+end_src
 
-* Rust
-Enables rust-mode when editing a *.rs file.
-
-#+begin_src emacs-lisp
-(after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
-#+end_src
-
-* Org
-Sets settings for org-mode such as the directory, the org-agenda file, the journal directory, etc.
-
-#+begin_src emacs-lisp
-(after! org
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (setq org-directory "~/Org/"
-        org-agenda-files '("~/Org/agenda.org")
-        org-default-notes-file (expand-file-name "notes.org" org-directory)
-        org-ellipsis " ▼ "
-        org-log-done 'time
-        org-journal-dir "~/Org/journal/"
-        org-journal-date-format "%B %d, %Y (%A) "
-        org-journal-file-format "%Y-%m-%d.org"
-        org-hide-emphasis-markers t
-        org-link-abbrev-alist
-          '(("google" . "http://www.google.com/search?q=")
-            ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-            ("ddg" . "https://duckduckgo.com/?q=")
-            ("wiki" . "https://en.wikipedia.org/wiki/"))))
-#+end_src
-
-* Emacs Everywhere
-Sets up emacs-everywhere which allows you to use emacs in place of a standard text editor in a web site for example.
-
-#+begin_src emacs-lisp
-
-#+end_src
-
-* Flutter/Dart
-Sets up dart mode and usage of flutter
-
-#+begin_src emacs-lisp
-(use-package lsp-mode
-  :hook (dart-mode . lsp)
-  :commands lsp)
-
-(add-hook 'dart-mode-hook 'lsp)
-(with-eval-after-load "projectile"
-  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
-  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
-
-(setq lsp-auto-guess-root t)
-
-(use-package dart-mode
-  :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
-  :hook (dart-mode . (lambda ()
-                      (add-hook 'after-save-hook #'flutter-run-or-hot-reload nil t)))
-  :custom
-  (dart-format-on-save t)
-  (dart-sdk-path "/Users/sashnortier/Desktop/Code/flutter/bin/cache/dart-sdk/"))
-
-(use-package flutter
-  :after dart-mode
-  :bind (:map dart-mode-map
-              ("C-M-x" . #'flutter-run-or-hot-reload))
-  :custom
-  (flutter-sdk-path "/home/trey/Programming/SDKs/flutter/"))
-#+end_src emacs-lisp
-
-* XML/UI
-Sets up nxml-mode and adds functionality for *.ui files
-
-#+begin_src emacs-lisp
-(fset 'xml-mode 'nxml-mode)
-(add-to-list 'auto-mode-alist '("\\.ui\\'" . nxml-mode))
-#+end_src
-
-* Dired
-Some options for the built-in file manager.
-
-#+begin_src emacs-lisp
-(evil-define-key 'normal dired-mode-map
-  (kbd "h") 'dired-up-directory
-  (kbd "l") 'dired-open-file)
-(evil-define-key 'normal peep-dired-mode-map
-  (kbd "j") 'peep-dired-next-file
-  (kbd "k") 'peep-dired-prev-file)
-(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-(setq dired-open-extensions '(("gif" . "sxiv")
-                              ("jpg" . "sxiv")
-                              ("png" . "sxiv")
-                              ("mkv" . "mpv")
-                              ("mp4" . "mpv")))
-#+end_src
-
-* mu4e
-Enables mu4e. My email addresses are contained in a seperate file for privacy reasons.
-
-#+begin_src emacs-lisp
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-(load "~/.config/doom/email")
-(defun my-mu4e-set-account ()
-  "Set the account for composing a message."
-  (let* ((account
-          (if mu4e-compose-parent-message
-              (let ((maildir (mu4e-message-field mu4e-compose-parent-message :maildir)))
-                (string-match "/\\(.*?\\)/" maildir)
-                (match-string 1 maildir))
-            (completing-read (format "Compose with account: (%s) "
-                                     (mapconcat #'(lambda (var) (car var))
-                                                my-mu4e-account-alist "/"))
-                             (mapcar #'(lambda (var) (car var)) my-mu4e-account-alist)
-                             nil t nil nil (caar my-mu4e-account-alist))))
-         (account-vars (cdr (assoc account my-mu4e-account-alist))))
-    (if account-vars
-        (mapc #'(lambda (var)
-                  (set (car var) (cadr var)))
-              account-vars)
-      (error "No email account found"))))
-
-(add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
-#+end_src
-
-* Haskell Mode
-Enables haskell-mode
-
-#+begin_src emacs-lisp
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'haskell-literate-mode-hook #'lsp)
-#+end_src
-
-* Emojis
-Enables emoji support.
-
+** Emojis
 #+begin_src emacs-lisp
 (use-package emojify
   :hook (after-init . global-emojify-mode))

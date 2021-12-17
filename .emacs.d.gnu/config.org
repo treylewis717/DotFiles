@@ -1,5 +1,6 @@
 #+TITLE: TL Emacs Config
 #+AUTHOR: Trey Lewis <tldesktopenvironment@gmail.com>
+#+PROPERTY: header-args :tangle config.el
 
 * Package Management
 ** Setup package.el to work with MELPA.
