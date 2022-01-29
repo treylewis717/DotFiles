@@ -107,14 +107,6 @@ Sets up dart mode and usage of flutter
   (flutter-sdk-path "/home/trey/Programming/SDKs/flutter/"))
 #+end_src emacs-lisp
 
-** Haskell Mode
-Enables haskell-mode
-
-#+begin_src emacs-lisp
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'haskell-literate-mode-hook #'lsp)
-#+end_src
-
 ** Org
 Sets settings for org-mode such as the directory, the org-agenda file, the journal directory, etc.
 
@@ -226,8 +218,7 @@ Enables the neotree file viewer.
       :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
       :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
       :desc "Open directory in neotree" "d n" #'neotree-dir)
-(after! doom-dashboard-init-h
-  (neotree))
+(neotree)
 #+end_src
 
 * Theme

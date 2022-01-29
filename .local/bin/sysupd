@@ -17,6 +17,17 @@ flatpak update
 echo "--- End Flatpak ---"
 
 echo ""
+echo "--- XPAD ---"
+dir=$PWD
+cd /usr/src/xpad-0.4
+sudo git fetch
+sudo git checkout origin/master
+sudo dkms remove -m xpad -v 0.4 --all
+sudo dkms install -m xpad -v 0.4
+cd $dir
+echo "--- End XPAD ---"
+
+echo ""
 echo "--- System ---"
 paru -Syyu
 echo "--- End System ---"

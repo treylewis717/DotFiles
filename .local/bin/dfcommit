@@ -3,4 +3,4 @@
 
 read -p "Please enter commit message: " message
 
-/usr/bin/git --git-dir=/mnt/ODrive1/git-repos/DotFiles/ --work-tree=$HOME commit -am "$message"
+/usr/bin/git --git-dir=/mnt/Projects/Git/DotFiles/ --work-tree=$HOME commit -am "$message"

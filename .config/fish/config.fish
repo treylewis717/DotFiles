@@ -4,6 +4,7 @@ set TERM "alacritty"
 set EDITOR "nvim"
 set -gx RUST_BACKTRACE 1
 set -gx CHROME_EXECUTABLE "/usr/bin/google-chrome-stable"
+set -gx ANDROID_SDK_ROOT "/home/trey/Android/Sdk"
 [ -f "/home/trey/.ghcup/env" ] && source "/home/trey/.ghcup/env" # ghcup-env
 
 ### ALIASES
@@ -24,7 +25,7 @@ alias vim="nvim"
 alias find="fd"
 
 # git dotfiles
-alias dfgit='/usr/bin/git --git-dir=/mnt/ODrive1/git-repos/DotFiles/ --work-tree=$HOME'
+alias dfgit='/usr/bin/git --git-dir=/mnt/Projects/Git/DotFiles/ --work-tree=$HOME'
 alias dfpush='dfgit push all'
 
 # grep

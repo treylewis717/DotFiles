@@ -24,9 +24,6 @@
 
 
 
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'haskell-literate-mode-hook #'lsp)
-
 (after! org
   (setq org-directory "~/Org/"
         org-agenda-files '("~/Org/agenda.org")
@@ -109,8 +106,7 @@
       :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
       :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
       :desc "Open directory in neotree" "d n" #'neotree-dir)
-(after! doom-dashboard-init-h
-  (neotree))
+(neotree)
 
 (setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
       doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
