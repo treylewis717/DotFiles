@@ -306,6 +306,7 @@ myLogHook = return ()
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "lxsession &"
+  spawnOnce "picom -b &"
   spawnOnce "nm-applet &"
   spawnOnce "blueman-applet &"
   spawnOnce "volumeicon &"

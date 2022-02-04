@@ -23,5 +23,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <action=`xdotool key control+alt+g`><icon=haskell_20.xpm/> </action><fc=#666666>|</fc>%UnsafeStdinReader% }{ <fc=#EC0000><fn=1> </fn> %uname% </fc> <fc=#666666>|</fc> <fc=#00EC00> %cpu% </fc> <fc=#666666>|</fc> <fc=#0000EC> %memory% </fc> <fc=#666666>|</fc> <fc=#C800C8> %wlan0% </fc> <fc=#666666>|</fc> <fc=#00CBFF> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#666666>|</fc> <fc=#EEC800>%date%</fc> <fc=#666666>|</fc> <fc=#F26F00>%time%</fc> <fc=#666666>|</fc> %trayerpad%"
+       , template = "<icon=logo.xpm/><fc=#666666>|</fc>%UnsafeStdinReader% }{ <fc=#EC0000><fn=1> </fn> %uname% </fc> <fc=#666666>|</fc> <fc=#00EC00> %cpu% </fc> <fc=#666666>|</fc> <fc=#0000EC> %memory% </fc> <fc=#666666>|</fc> <fc=#C800C8> %wlan0% </fc> <fc=#666666>|</fc> <fc=#00CBFF> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#666666>|</fc> <fc=#EEC800>%date%</fc> <fc=#666666>|</fc> <fc=#F26F00>%time%</fc> <fc=#666666>|</fc> %trayerpad%"
        }

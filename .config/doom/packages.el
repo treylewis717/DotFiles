@@ -54,7 +54,5 @@
 (package! dired-open)
 (package! peep-dired)
 (package! emojify)
-(package! exwm)
 (package! find-file-in-project)
 (package! pkgbuild-mode)
-(package! dashboard)

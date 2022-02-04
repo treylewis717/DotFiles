@@ -1,7 +1,3 @@
-(add-hook! '+doom-dashboard-functions :append
-           (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Yay evil!")))
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
-
 (evil-define-key 'normal dired-mode-map
   (kbd "h") 'dired-up-directory
   (kbd "l") 'dired-open-file)
@@ -56,7 +52,8 @@
                               auto-mode-alist))
 
 (after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
+  (setq rustic-babel-format-src-block nil
+        rustic-format-trigger nil))
 
 (fset 'xml-mode 'nxml-mode)
 (add-to-list 'auto-mode-alist '("\\.ui\\'" . nxml-mode))
@@ -84,29 +81,29 @@
 
 (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
 
-(after! neotree
-  (setq neo-smart-open t
-        neo-window-fixed-size nil))
-
-(after! doom-themes
-  (setq doom-neotree-enable-variable-pitch t))
-
-(defun neotree-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (ffip-project-root))
-        (file-name (buffer-file-name)))
-    (if project-dir
-        (progn
-          (neotree-dir project-dir)
-          (neotree-find file-name))
-      (message "Could not find git project root."))))
-
-(map! :leader
-      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
-      :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
-      :desc "Open directory in neotree" "d n" #'neotree-dir)
-(neotree)
+;;(after! neotree
+;;  (setq neo-smart-open t
+;;        neo-window-fixed-size nil))
+;;
+;;(after! doom-themes
+;;  (setq doom-neotree-enable-variable-pitch t))
+;;
+;;(defun neotree-project-dir ()
+;;  "Open NeoTree using the git root."
+;;  (interactive)
+;;  (let ((project-dir (ffip-project-root))
+;;        (file-name (buffer-file-name)))
+;;    (if project-dir
+;;        (progn
+;;          (neotree-dir project-dir)
+;;          (neotree-find file-name))
+;;      (message "Could not find git project root."))))
+;;
+;;(map! :leader
+;;      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
+;;      :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
+;;      :desc "Open directory in neotree" "d n" #'neotree-dir)
+;;(neotree)
 
 (setq doom-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11)
       doom-big-font (font-spec :family "RobotoMono Nerd Font Mono" :size 11))
@@ -120,46 +117,7 @@
 
 (setq doom-theme 'doom-one)
 
-(lambda () (interactive) (fringe-mode "no-fringes"))
-
 (setq display-line-numbers-type t)
-
-(setq dashboard-set-heading-icons t)
-(setq dashboard-set-file-icons t)
-(setq dashboard-banner-logo-title "Emacs is More Than A Text Editor!")
-(setq dashboard-startup-banner 'logo)
-(setq dashboard-center-content t)
-(setq dashboard-items '((recents . 10)
-                        (agenda . 5)
-                        (projects . 5)))
-
-(dashboard-setup-startup-hook)
-(dashboard-modify-heading-icons '((recents . "file-text")
-                                 (bookmarks . "book")))
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
 (use-package emojify
   :hook (after-init . global-emojify-mode))
-
-;; (require 'exwm)
-;; (require 'exwm-config)
-;; (setq exwm-input-global-keys
-      ;; `(([?\s-q] . exwm-reset)
-        ;; ,@(mapcar (lambda (i)
-                    ;; `(,(kbd (format "s-%d" i)) .
-                      ;; (lambda ()
-                        ;; (interactive)
-                        ;; (exwm-workspace-switch-create ,i))))
-                  ;; (number-sequence 0 9))
-        ;; ([?\s-<return>] . (lambda ()
-                            ;; (interactive)
-                            ;; (start-process "" nil "/usr/bin/alacritty -e fish"))))
-
-;; (define-key exwm-mode-map [?\s-t] 'exwm-floating-toggle-floating)
-
-;; (require 'exwm-systemtray)
-;; (exwm-systemtray-enable)
-
-;; (setq exwm-workspace-number 6)
-
-;; (exwm-enable)

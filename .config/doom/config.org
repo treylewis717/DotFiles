@@ -1,15 +1,6 @@
 #+TITLE: TL Doom Emacs Config
 #+PROPERTY: header-args :tangle config.el
 
-* Dashboard
-Changes the dashboard a little bit
-
-#+begin_src emacs-lisp
-(add-hook! '+doom-dashboard-functions :append
-           (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Yay evil!")))
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
-#+end_src
-
 * Dired
 Some options for the built-in file manager.
 
@@ -47,66 +38,7 @@ Sets up emacs-everywhere which allows you to use emacs in place of a standard te
 
 #+end_src
 
-* EXWM
-Config for the Emacs X Window Manager
-
-#+begin_src emacs-lisP
-;; (require 'exwm)
-;; (require 'exwm-config)
-;; (setq exwm-input-global-keys
-      ;; `(([?\s-q] . exwm-reset)
-        ;; ,@(mapcar (lambda (i)
-                    ;; `(,(kbd (format "s-%d" i)) .
-                      ;; (lambda ()
-                        ;; (interactive)
-                        ;; (exwm-workspace-switch-create ,i))))
-                  ;; (number-sequence 0 9))
-        ;; ([?\s-<return>] . (lambda ()
-                            ;; (interactive)
-                            ;; (start-process "" nil "/usr/bin/alacritty -e fish"))))
-
-;; (define-key exwm-mode-map [?\s-t] 'exwm-floating-toggle-floating)
-
-;; (require 'exwm-systemtray)
-;; (exwm-systemtray-enable)
-
-;; (setq exwm-workspace-number 6)
-
-;; (exwm-enable)
-#+end_src
-
 * Language Support
-** Flutter/Dart
-Sets up dart mode and usage of flutter
-
-#+begin_src emacs-lisp
-(use-package lsp-mode
-  :hook (dart-mode . lsp)
-  :commands lsp)
-
-(add-hook 'dart-mode-hook 'lsp)
-(with-eval-after-load "projectile"
-  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
-  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
-
-(setq lsp-auto-guess-root t)
-
-(use-package dart-mode
-  :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
-  :hook (dart-mode . (lambda ()
-                      (add-hook 'after-save-hook #'flutter-run-or-hot-reload nil t)))
-  :custom
-  (dart-format-on-save t)
-  (dart-sdk-path "/Users/sashnortier/Desktop/Code/flutter/bin/cache/dart-sdk/"))
-
-(use-package flutter
-  :after dart-mode
-  :bind (:map dart-mode-map
-              ("C-M-x" . #'flutter-run-or-hot-reload))
-  :custom
-  (flutter-sdk-path "/home/trey/Programming/SDKs/flutter/"))
-#+end_src emacs-lisp
-
 ** Org
 Sets settings for org-mode such as the directory, the org-agenda file, the journal directory, etc.
 
@@ -149,11 +81,12 @@ Enables the pkgbuild major mode.
 #+end_src
 
 ** Rust
-Enables rust-mode when editing a *.rs file.
+Configure Rustic
 
 #+begin_src emacs-lisp
 (after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
+  (setq rustic-babel-format-src-block nil
+        rustic-format-trigger nil))
 #+end_src
 
 ** XML/UI
@@ -196,29 +129,29 @@ Enables mu4e. My email addresses are contained in a seperate file for privacy re
 Enables the neotree file viewer.
 
 #+begin_src emacs-lisp
-(after! neotree
-  (setq neo-smart-open t
-        neo-window-fixed-size nil))
-
-(after! doom-themes
-  (setq doom-neotree-enable-variable-pitch t))
-
-(defun neotree-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (ffip-project-root))
-        (file-name (buffer-file-name)))
-    (if project-dir
-        (progn
-          (neotree-dir project-dir)
-          (neotree-find file-name))
-      (message "Could not find git project root."))))
-
-(map! :leader
-      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
-      :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
-      :desc "Open directory in neotree" "d n" #'neotree-dir)
-(neotree)
+;;(after! neotree
+;;  (setq neo-smart-open t
+;;        neo-window-fixed-size nil))
+;;
+;;(after! doom-themes
+;;  (setq doom-neotree-enable-variable-pitch t))
+;;
+;;(defun neotree-project-dir ()
+;;  "Open NeoTree using the git root."
+;;  (interactive)
+;;  (let ((project-dir (ffip-project-root))
+;;        (file-name (buffer-file-name)))
+;;    (if project-dir
+;;        (progn
+;;          (neotree-dir project-dir)
+;;          (neotree-find file-name))
+;;      (message "Could not find git project root."))))
+;;
+;;(map! :leader
+;;      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
+;;      :desc "Put neofetch in project root dir" "d p" #'neotree-project-dir
+;;      :desc "Open directory in neotree" "d n" #'neotree-dir)
+;;(neotree)
 #+end_src
 
 * Theme
@@ -244,33 +177,11 @@ Sets the theme.
 (setq doom-theme 'doom-one)
 #+end_src
 
-** Disable fringes
-#+begin_src emacs-lisp
-(lambda () (interactive) (fringe-mode "no-fringes"))
-#+end_src
-
 ** Line Numbers
 Enables line numbers.
 
 #+begin_src emacs-lisp
 (setq display-line-numbers-type t)
-#+end_src
-
-** Dashboard
-#+begin_src emacs-lisp
-(setq dashboard-set-heading-icons t)
-(setq dashboard-set-file-icons t)
-(setq dashboard-banner-logo-title "Emacs is More Than A Text Editor!")
-(setq dashboard-startup-banner 'logo)
-(setq dashboard-center-content t)
-(setq dashboard-items '((recents . 10)
-                        (agenda . 5)
-                        (projects . 5)))
-
-(dashboard-setup-startup-hook)
-(dashboard-modify-heading-icons '((recents . "file-text")
-                                 (bookmarks . "book")))
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+end_src
 
 ** Emojis

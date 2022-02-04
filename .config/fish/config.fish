@@ -26,7 +26,7 @@ alias find="fd"
 
 # git dotfiles
 alias dfgit='/usr/bin/git --git-dir=/mnt/Projects/Git/DotFiles/ --work-tree=$HOME'
-alias dfpush='dfgit push all'
+alias dfpush='dfgit push'
 
 # grep
 alias grep='rg --color=auto'

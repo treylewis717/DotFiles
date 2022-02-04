@@ -45,7 +45,8 @@ colors:
     white:   '#b2b2b2'
 
 
-background_opacity: 1.0
+window:
+  opacity: 1.0
 
 shell:
   program: /usr/bin/fish
@@ -69,3 +70,4 @@ font:
   offset:
     x: 0
     y: 0
+
