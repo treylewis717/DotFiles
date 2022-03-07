@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 echo ""
 echo "--- Rust ---"
 rustup update
 echo "--- End Rust ---"
 
-echo ""
-echo "--- Doom Emacs ---"
-doom sync
-doom upgrade
-echo "--- End Doom Emacs ---"
+#echo ""
+#echo "--- Doom Emacs ---"
+#doom sync
+#doom upgrade
+#echo "--- End Doom Emacs ---"
 
 echo ""
 echo "--- Flatpak ---"
-flatpak update
+flatpak update --noninteractive
 echo "--- End Flatpak ---"
 
 echo ""
@@ -29,7 +31,7 @@ echo "--- End XPAD ---"
 
 echo ""
 echo "--- System ---"
-paru -Syyu
+paru -Syyu --noconfirm
 echo "--- End System ---"
 
 echo ""

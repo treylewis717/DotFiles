@@ -2,14 +2,14 @@
 [global-config]
 # Options: alt, ctrl, logo, mod2, mod3
 # This key can be referenced in custom keybindings as `meta`
-meta-key = "alt"
+meta-key = "logo"
 
 focus-follows-mouse = true
 
 # One workspace with each name is generated automatically. Each workspace receives layouts
 # as defined in the [[layout]] list below. You can configure keybindings to switch to
 # workspaces by name, or to move windows between them.
-workspace-names = ["main", "2", "3", "4", "5", "6", "7", "8", "9"]
+workspace-names = ["Main", "Background", "Gaming", "Tangram", "Entertainment", "VM", "Extra"]
 
 # Autogenerate keybinds to switch to workspaces, specifically:
 # - Bind meta-$N to switch to workspace number N, for each number key $N,

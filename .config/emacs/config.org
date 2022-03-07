@@ -40,7 +40,7 @@ Keybinds that start with space
 (nvmap :prefix "SPC"
        "."     '(find-file :which-key "Find file")
        "SPC"   '(counsel-M-x :which-key "M-x")
-       "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+       "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
        "f r"   '(counsel-recentf :which-key "Recent files"))
 #+end_src
 
@@ -73,16 +73,6 @@ Keybinds that start with space
 * All The Icons
 #+begin_src emacs-lisp
 (use-package all-the-icons)
-#+end_src
-
-* Elcord
-Enables discord rich presence
-#+begin_src emacs-lisp
-;;(use-package elcord)
-;;(elcord-mode)
-;;(setq elcord-use-major-mode-as-main-icon 't)
-;;(setq elcord-display-elasped nil)
-;;(setq elcord-quiet 't)
 #+end_src
 
 * Evil Mode
@@ -153,6 +143,10 @@ Sets up font as RobotoMono Nerd Font at size 11
 (setq ivy-initial-inputs-alist nil)
 (use-package smex)
 (smex-initialize)
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
 #+end_src
 
 * Language Support
@@ -166,6 +160,30 @@ Sets up font as RobotoMono Nerd Font at size 11
   :commands lsp)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+#+end_src
+
+** Install Company
+#+begin_src emacs-lisp
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+#+end_src
+
+** Install Rainbow Delimiters
+Colors parentheses
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
 ** Install format-all

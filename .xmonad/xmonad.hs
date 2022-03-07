@@ -1,83 +1,58 @@
 -- Imports --
 
-import           System.Directory
-import           System.Exit                    ( exitSuccess )
-import           System.IO                      ( hPutStrLn )
-  -- Base --
-import           XMonad
-import qualified XMonad.StackSet               as W
+  -- System --
+import System.Directory
+import System.Exit (exitSuccess)
+import System.IO (hPutStrLn)
+import System.Exit
 
-import qualified Data.Map                      as M
-import           Data.Maybe                     ( fromJust )
+  -- Base --
+import XMonad
+import qualified XMonad.StackSet as W
+
   -- Data --
-import           Data.Monoid
+import qualified Data.Map as M
+import Data.Maybe (fromJust)
+import Data.Monoid
 
   -- Actions --
-import           XMonad.Actions.CopyWindow      ( kill1 )
-import           XMonad.Actions.CycleWS         ( WSType(WSIs)
-                                                , moveTo
-                                                )
-import           XMonad.Actions.MouseResize
-import           XMonad.Actions.SpawnOn
-import           XMonad.Actions.WithAll         ( killAll )
+import XMonad.Actions.CopyWindow (kill1 )
+import XMonad.Actions.CycleWS (WSType(WSIs), moveTo)
+import XMonad.Actions.MouseResize
+import XMonad.Actions.SpawnOn
+import XMonad.Actions.WithAll (killAll)
 
-  -- System --
-import           System.Exit
-
-import           XMonad.Hooks.DynamicLog        ( PP(..)
-                                                , dynamicLogWithPP
-                                                , shorten
-                                                , wrap
-                                                , xmobarColor
-                                                , xmobarPP
-                                                )
-import           XMonad.Hooks.DynamicProperty   ( dynamicPropertyChange )
-import           XMonad.Hooks.EwmhDesktops
   -- Hooks --
-import           XMonad.Hooks.ManageDocks
-import           XMonad.Hooks.SetWMName
-import           XMonad.Hooks.WindowSwallowing  ( swallowEventHook )
-import           XMonad.Hooks.WorkspaceHistory
+import XMonad.Hooks.DynamicLog (PP(..), dynamicLogWithPP, shorten, wrap, xmobarColor, xmobarPP)
+import XMonad.Hooks.DynamicProperty (dynamicPropertyChange)
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.WindowSwallowing (swallowEventHook)
+import XMonad.Hooks.WorkspaceHistory
 
   -- Util --
-import           XMonad.Util.EZConfig           ( additionalKeysP )
-import           XMonad.Util.Run
-import           XMonad.Util.SpawnOnce
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
 
   -- Layouts --
-import           XMonad.Layout.GridVariants     ( Grid(Grid) )
-import           XMonad.Layout.ResizableTile
-import           XMonad.Layout.ThreeColumns
-
-  -- Layouts Modifiers --
-import           XMonad.Layout.LayoutModifier
-import           XMonad.Layout.LimitWindows     ( decreaseLimit
-                                                , increaseLimit
-                                                , limitWindows
-                                                )
-import           XMonad.Layout.MultiToggle      ( (??)
-                                                , EOT(EOT)
-                                                , mkToggle
-                                                , single
-                                                )
-import           XMonad.Layout.MultiToggle.Instances
-                                                ( StdTransformers
-                                                  ( MIRROR
-                                                  , NBFULL
-                                                  , NOBORDERS
-                                                  )
-                                                )
-import           XMonad.Layout.NoBorders
-import           XMonad.Layout.Renamed
-import           XMonad.Layout.ShowWName
-import           XMonad.Layout.Simplest
-import           XMonad.Layout.Spacing
-import           XMonad.Layout.SubLayouts
-import qualified XMonad.Layout.ToggleLayouts   as T
-import           XMonad.Layout.WindowArranger   ( WindowArrangerMsg(..)
-                                                , windowArrange
-                                                )
-import           XMonad.Layout.WindowNavigation
+import XMonad.Layout.GridVariants (Grid(Grid))
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.LayoutModifier
+import XMonad.Layout.LimitWindows ( decreaseLimit, increaseLimit, limitWindows)
+import XMonad.Layout.MultiToggle ((??), EOT(EOT), mkToggle, single)
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(MIRROR, NBFULL, NOBORDERS))
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Renamed
+import XMonad.Layout.ShowWName
+import XMonad.Layout.Simplest
+import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts
+import qualified XMonad.Layout.ToggleLayouts as T
+import XMonad.Layout.WindowArranger (WindowArrangerMsg(..), windowArrange)
+import XMonad.Layout.WindowNavigation
 
 -- Key Definitions --
 
@@ -117,6 +92,7 @@ myWorkspaces :: [[Char]]
 myWorkspaces =
   [ " Main "
   , " Background "
+  , " Torrent "
   , " Gaming "
   , " Tangram "
   , " Entertainment "
@@ -139,9 +115,9 @@ myShowWNameTheme = def { swn_font    = "xft:RobotoMono Nerd Font:bold:size=60"
 -- Border Colors --
 
 myNormalBorderColor :: [Char]
-myNormalBorderColor = "#dddddd"
+myNormalBorderColor = "#dfdfdf"
 myFocusedBorderColor :: [Char]
-myFocusedBorderColor = "#ff0000"
+myFocusedBorderColor = "#ff6c6b"
 
 -- Functions --
 
@@ -275,12 +251,13 @@ myManageHook = composeAll
   , className =? "discord" --> doShift (myWorkspaces !! 1)
   , className =? "spot" --> doShift (myWorkspaces !! 1)
   , className =? "Barrier" --> doShift (myWorkspaces !! 1)
-  , className =? "Steam" --> doShift (myWorkspaces !! 2)
-  , className =? "heroic" --> doShift (myWorkspaces !! 2)
-  , className =? "ProtonUp-Qt" --> doShift (myWorkspaces !! 2)
-  , resource =? "re.sonny.Tangram" --> doShift (myWorkspaces !! 3)
-  , className =? "lbry" --> doShift (myWorkspaces !! 4)
-  , className =? "VirtualBox Manager" --> doShift (myWorkspaces !! 5)
+  , className =? "qbittorrent" --> doShift (myWorkspaces !! 2)
+  , className =? "Steam" --> doShift (myWorkspaces !! 3)
+  , className =? "heroic" --> doShift (myWorkspaces !! 3)
+  , className =? "ProtonUp-Qt" --> doShift (myWorkspaces !! 3)
+  , resource =? "re.sonny.Tangram" --> doShift (myWorkspaces !! 4)
+  , className =? "lbry" --> doShift (myWorkspaces !! 5)
+  , className =? "VirtualBox Manager" --> doShift (myWorkspaces !! 6)
   , resource =? "desktop_window" --> doIgnore
   ]
 
@@ -313,7 +290,7 @@ myStartupHook = do
   spawnOnce
     "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
   spawnOnce "crd --start &"
-  spawnOnce "discord &"
+  spawnOnce "com.discordapp.Discord &"
   spawnOnce "spotify &"
   spawnOnce "emacs --daemon &"
   spawnOnce "flameshot &"
@@ -321,12 +298,14 @@ myStartupHook = do
   spawnOnce "cadmus &"
   spawnOnce "steam &"
   spawnOnce "nitrogen --restore &"
+  -- spawnOnce "wallpaper &"
   spawnOnce "play-with-mpv &"
   spawnOnce "re.sonny.Tangram &"
   spawnOnce "dunst -config ~/.config/dunst/dunstrc &"
   spawnOnce "clipcatd &"
   spawnOnce "heroic &"
   spawnOnce "net.davidotek.pupgui2 &"
+  spawnOnce "qbittorent &"
 
 -- Main --
 
@@ -360,12 +339,12 @@ main = do
                         , logHook = myLogHook <+> dynamicLogWithPP xmobarPP
                                       { ppOutput = \x -> hPutStrLn xmproc0 x
                                       , ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]"
-                                      , ppVisible = xmobarColor "#98be65" ""-- . clickable
-                                      , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""-- . clickable
-                                      , ppHiddenNoWindows = xmobarColor "#c792ea" ""-- . clickable
-                                      , ppTitle = xmobarColor "#b3afc2" "" . shorten 60
-                                      , ppSep = "<fc=#666666> <fn=1>|</fn> </fc>"
-                                      , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                      , ppVisible = xmobarColor "#98be65" "" . clickable
+                                      , ppHidden = xmobarColor "#51afef" "" . wrap "*" "" . clickable
+                                      , ppHiddenNoWindows = xmobarColor "#a9a1e1" "" . clickable
+                                      , ppTitle = xmobarColor "#dfdfdf" "" . shorten 60
+                                      , ppSep = "<fc=#5b6268> <fn=1>|</fn> </fc>"
+                                      , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"
                                       , ppExtras = [windowCount]
                                       , ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
                                       }

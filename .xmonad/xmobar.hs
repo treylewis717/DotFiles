@@ -2,7 +2,7 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , additionalFonts = ["xft: RobotoMono Nerd Font:weight=bold:pixelsize=12:antialias=true:hinting=true"]
 
        , bgColor = "#282c34"
-       , fgColor = "#ffffff"
+       , fgColor = "#dfdfdf"
        , position = Static { xpos = 0, ypos = 0, width = 1920, height = 24 }
        , lowerOnStart = True
        , persistent = True
@@ -23,5 +23,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=logo.xpm/><fc=#666666>|</fc>%UnsafeStdinReader% }{ <fc=#EC0000><fn=1> </fn> %uname% </fc> <fc=#666666>|</fc> <fc=#00EC00> %cpu% </fc> <fc=#666666>|</fc> <fc=#0000EC> %memory% </fc> <fc=#666666>|</fc> <fc=#C800C8> %wlan0% </fc> <fc=#666666>|</fc> <fc=#00CBFF> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#666666>|</fc> <fc=#EEC800>%date%</fc> <fc=#666666>|</fc> <fc=#F26F00>%time%</fc> <fc=#666666>|</fc> %trayerpad%"
+       , template = "<icon=logo.xpm/><fc=#5b6268>|</fc>%UnsafeStdinReader% }{ <fc=#ff6c6b><fn=1> </fn> %uname% </fc> <fc=#5b6268>|</fc> <fc=#98be65> %cpu% </fc> <fc=#5b6268>|</fc> <fc=#2257b0> %memory% </fc> <fc=#5b6268>|</fc> <fc=#c678dd> %wlan0% </fc> <fc=#5b6268>|</fc> <fc=#46d9ff> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#5b6268>|</fc> <fc=#ebbe7b>%date%</fc> <fc=#5b6268>|</fc> <fc=#da8548>%time%</fc> <fc=#5b6268>|</fc> %trayerpad%"
        }

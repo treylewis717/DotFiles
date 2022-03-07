@@ -21,7 +21,7 @@
 (nvmap :prefix "SPC"
        "."     '(find-file :which-key "Find file")
        "SPC"   '(counsel-M-x :which-key "M-x")
-       "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+       "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
        "f r"   '(counsel-recentf :which-key "Recent files"))
 
 (setq mouse-yank-at-point t)
@@ -45,12 +45,6 @@
 (setq load-prefer-newer noninteractive)
 
 (use-package all-the-icons)
-
-;;(use-package elcord)
-;;(elcord-mode)
-;;(setq elcord-use-major-mode-as-main-icon 't)
-;;(setq elcord-display-elasped nil)
-;;(setq elcord-quiet 't)
 
 (use-package evil
   :init
@@ -111,6 +105,10 @@
 (setq ivy-initial-inputs-alist nil)
 (use-package smex)
 (smex-initialize)
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
 
 (use-package lsp-mode
   :init
@@ -120,6 +118,23 @@
   :commands lsp)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package format-all)
 (add-hook 'prog-mode-hook 'format-all-mode)
