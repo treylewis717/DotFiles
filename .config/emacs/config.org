@@ -228,6 +228,22 @@ Colors parentheses
         highlight-indent-guides-suppress-auto-error t))
 #+end_src
 
+* vterm
+#+begin_src emacs-lisp
+(use-package vterm
+  :when (bound-and-true-p module-file-suffix)
+  :commands vterm-mode
+  :hook (vterm-mode . doom-mark-buffer-as-real-h)
+  :hook (vterm-mode . hide-mode-line-mode)
+  :init
+  (when noninteractive
+    (advice-add #'vterm-module-compile :override #'ignore)
+    (provide 'vterm-module))
+  :config
+  (setq vterm-kill-buffer-on-exit t)
+  (setq vterm-max-scrollback 5000))
+#+end_src
+
 * Org Mode
 #+begin_src emacs-lisp
 (use-package org-bullets)

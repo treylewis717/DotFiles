@@ -12,7 +12,7 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , commands = [
                       Run Network "wlan0" ["-t", "<fn=1> </fn>  <rx>kb  <fn=1> </fn>  <tx>kb"] 10
                     , Run Cpu ["-t", "<fn=1> </fn> CPU: (<total>%)", "-H","50",
-                               "--normal","green","--high","red"] 10
+                               "--normal","#98be65","--high","#ff6c6b"] 10
                     , Run Memory ["-t","<fn=1> </fn> Memory: (<usedratio>%)"] 10
                     , Run Com "uname" ["-s","-r"] "" 3600
 	            , Run Com "/home/trey/.local/bin/pacupdate" [] "pacupdate" 2000

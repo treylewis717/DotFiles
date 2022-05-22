@@ -160,6 +160,19 @@
   (setq highlight-indent-guides-method 'character
         highlight-indent-guides-suppress-auto-error t))
 
+(use-package vterm
+  :when (bound-and-true-p module-file-suffix)
+  :commands vterm-mode
+  :hook (vterm-mode . doom-mark-buffer-as-real-h)
+  :hook (vterm-mode . hide-mode-line-mode)
+  :init
+  (when noninteractive
+    (advice-add #'vterm-module-compile :override #'ignore)
+    (provide 'vterm-module))
+  :config
+  (setq vterm-kill-buffer-on-exit t)
+  (setq vterm-max-scrollback 5000))
+
 (use-package org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (add-hook 'org-mode-hook 'org-indent-mode)

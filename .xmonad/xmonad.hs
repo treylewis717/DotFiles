@@ -71,7 +71,8 @@ myBrowser :: String
 myBrowser = "librewolf"
 
 myEditor :: String
-myEditor = "emacsclient -c -a emacs"
+myEditor = "idea"
+--myEditor = "emacsclient -c -a emacs"
 
 -- Focus --
 
@@ -92,11 +93,9 @@ myWorkspaces :: [[Char]]
 myWorkspaces =
   [ " Main "
   , " Background "
-  , " Torrent "
+  , " System "
   , " Gaming "
   , " Tangram "
-  , " Entertainment "
-  , " VM "
   , " Extra "
   ]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1 ..] -- (,) == \x y -> (x,y)
@@ -147,7 +146,7 @@ myKeys =
   , ("M-S-b"                 , spawn myBrowser)
          -- close focused window
   , ("M-S-c"                 , kill1)
-         -- start emacs --
+         -- start editor --
   , ("M-S-e e"               , spawn myEditor)
          -- start emacs everywhere
   , ("M-e", spawn "emacsclient --eval '(emacs-everywhere)'")
@@ -250,14 +249,13 @@ myManageHook = composeAll
   , className =? "qalculate-gtk" --> doFloat
   , className =? "discord" --> doShift (myWorkspaces !! 1)
   , className =? "spot" --> doShift (myWorkspaces !! 1)
-  , className =? "Barrier" --> doShift (myWorkspaces !! 1)
+  , className =? "Barrier" --> doShift (myWorkspaces !! 2)
   , className =? "qbittorrent" --> doShift (myWorkspaces !! 2)
+  , title =? "btop /home/trey" --> doShift (myWorkspaces !! 2)
   , className =? "Steam" --> doShift (myWorkspaces !! 3)
   , className =? "heroic" --> doShift (myWorkspaces !! 3)
   , className =? "ProtonUp-Qt" --> doShift (myWorkspaces !! 3)
   , resource =? "re.sonny.Tangram" --> doShift (myWorkspaces !! 4)
-  , className =? "lbry" --> doShift (myWorkspaces !! 5)
-  , className =? "VirtualBox Manager" --> doShift (myWorkspaces !! 6)
   , resource =? "desktop_window" --> doIgnore
   ]
 
@@ -287,25 +285,21 @@ myStartupHook = do
   spawnOnce "nm-applet &"
   spawnOnce "blueman-applet &"
   spawnOnce "volumeicon &"
-  spawnOnce
-    "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-  spawnOnce "crd --start &"
-  spawnOnce "com.discordapp.Discord &"
+  spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
+  spawnOnce "discord &"
   spawnOnce "spotify &"
   spawnOnce "emacs --daemon &"
   spawnOnce "flameshot &"
-  spawnOnce "barrier --config /home/trey/barrier/barrier.conf"
-  spawnOnce "cadmus &"
+  spawnOnce "barrier --config /home/trey/barrier/barrier.conf &"
   spawnOnce "steam &"
   spawnOnce "nitrogen --restore &"
-  -- spawnOnce "wallpaper &"
-  spawnOnce "play-with-mpv &"
   spawnOnce "re.sonny.Tangram &"
   spawnOnce "dunst -config ~/.config/dunst/dunstrc &"
-  spawnOnce "clipcatd &"
   spawnOnce "heroic &"
   spawnOnce "net.davidotek.pupgui2 &"
   spawnOnce "qbittorent &"
+  spawnOnce "alacritty -e btop -t 'btop /home/trey' &"
+  setWMName "LG3D"
 
 -- Main --
 
