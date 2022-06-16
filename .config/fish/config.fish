@@ -1,19 +1,33 @@
 ### EXPORT
+
+# Disables greeting
 set fish_greeting
+
+# Sets $TERM as alacritty
 set TERM "alacritty"
+
+# Sets my editor to Neovim
 set EDITOR "nvim"
+
+# Zoxide will echo the matched dir before navigating
+set -gx _ZO_ECHO 1
+
+# More verbose Rust backtrace
 set -gx RUST_BACKTRACE 1
+
+# Sets my chrome executable
 set -gx CHROME_EXECUTABLE "/usr/bin/google-chrome-stable"
+
+# Sets the Android SDK location
 set -gx ANDROID_SDK_ROOT "/home/trey/Android/Sdk"
+
+# Enables ghcup in shell
 [ -f "/home/trey/.ghcup/env" ] && source "/home/trey/.ghcup/env" # ghcup-env
 
 ### ALIASES
 
-# root
-alias r='su -'
-
 # ls
-alias ls='exa -lah --color=always --group-directories-first'
+alias ls='exa -lah --icons --color=always --group-directories-first --git --binary'
 
 # cat to bat
 alias cat="bat"
@@ -61,7 +75,8 @@ alias testpl='ping archlinux.org'
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 ### Startup
-# scd fish-init | source
+
 echo " "
 neofetch
 starship init fish | source
+zoxide init --cmd cd fish | source

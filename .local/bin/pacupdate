@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ((checkpacupdate=$(checkupdates+aur | wc -l)))
 ((checkrustupdate=$(rustup check | grep "Update available" | wc -l)))

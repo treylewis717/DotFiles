@@ -68,3 +68,4 @@ eval "$(starship init bash)"
 # PS1='[\u@\h \W]\$ '
 source "$HOME/.cargo/env"
 [ -f "/home/trey/.ghcup/env" ] && source "/home/trey/.ghcup/env" # ghcup-env
+eval "$(zoxide init bash)"

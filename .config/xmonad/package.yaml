@@ -1,4 +1,4 @@
-name: xmonad-config
+name: tl-xmonad-config
 synopsis: My config for XMonad and XMobar
 description: My config for XMonad and XMobar
 author: Trey Lewis <tldesktopenvironment@gmail.com>
@@ -9,7 +9,6 @@ dependencies:
   - base
   - xmonad >= 0.17.0
   - xmonad-contrib >= 0.17.0
-  - xmobar >= 0.40
     
 library:
   source-dirs: .

@@ -1,7 +1,7 @@
 #+TITLE: Setup
 #+AUTHOR: Trey Lewis (TL)
 
-Install stack and cabal-install via ghcup
+Install stack and ghc via ghcup
 #+begin_example
 $ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 #+end_example
@@ -19,10 +19,27 @@ $ echo $PATH
 
 Install dependencies by running:
 #+begin_example
-$ cd ~/.xmonad
-$ cabal install happy
-$ stack build
+$ cd .config/xmonad
+$ stack init
 #+end_example
+
+Edit the stack.yaml and enable system-ghc
+#+begin_example
+diff --git a/stack.yaml.o b/stack.yaml
+index b920057..614d792 100644
+--- a/stack.yaml.o
++++ b/stack.yaml
+@@ -49,7 +49,7 @@ packages:
+ # extra-package-dbs: []
+
+ # Control whether we use the GHC we find on the path
+-# system-ghc: true
++system-ghc: true
+ #
+ # Require a specific version of stack, using version ranges
+ # require-stack-version: -any # Default
+#+end_example
+
 
 Finally, copy xmonad.desktop to /usr/share/xsessions/
 #+begin_example
