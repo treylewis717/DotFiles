@@ -44,8 +44,8 @@ alias mv='mv -iv'
 alias rm='rm -iv'
 alias frm="rm -rfv"
 
-# lightdm
-alias lock='light-locker-command -l'
+# wget
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 # clear
 alias clear='clear; echo " "; neofetch'
