@@ -1,33 +1,33 @@
 #+TITLE: Setup
 #+AUTHOR: Trey Lewis (TL)
 
-Install stack and ghc via ghcup
+* Install stack and ghc via ghcup
 #+begin_example
 $ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 #+end_example
 
-Next, install xmonad and xmobar
+* Next, install xmonad and xmobar
 #+begin_example
 $ stack install xmonad
 $ stack install --flag xmobar:all_extensions --flag xmobar:with_xft xmobar
 #+end_example
 
-Also confirm that ~/.local/bin is in your path by running:
+* Confirm that ~/.local/bin is in your path by running:
 #+begin_example
 $ echo $PATH
 #+end_example
 
-Install dependencies by running:
+* Install dependencies by running:
 #+begin_example
 $ cd .config/xmonad
 $ stack init
 #+end_example
 
-Edit the stack.yaml and enable system-ghc
+* Edit the stack.yaml and enable system-ghc
 #+begin_example
-diff --git a/stack.yaml.o b/stack.yaml
+diff --git a/stack.yaml b/stack.yaml
 index b920057..614d792 100644
---- a/stack.yaml.o
+--- a/stack.yaml
 +++ b/stack.yaml
 @@ -49,7 +49,7 @@ packages:
  # extra-package-dbs: []
@@ -41,7 +41,7 @@ index b920057..614d792 100644
 #+end_example
 
 
-Finally, copy xmonad.desktop to /usr/share/xsessions/
+* Copy xmonad.desktop to /usr/share/xsessions/
 #+begin_example
 $ sudo cp ~/.xmonad/xmonad.desktop /usr/share/xsessions/
 #+end_example
