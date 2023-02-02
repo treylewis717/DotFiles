@@ -10,8 +10,7 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , iconRoot = "/home/trey/.config/xmonad/xpm/" -- default: "."
        , allDesktops = True
        , commands = [
-                      Run Network "wlan0" ["-t", "<fn=1> </fn>  <rx>kb  <fn=1> </fn>  <tx>kb"] 10
-                    , Run Cpu ["-t", "<fn=1> </fn> CPU: (<total>%)", "-H","50",
+                    Run Cpu ["-t", "<fn=1> </fn> CPU: (<total>%)", "-H","50",
                                "--normal","#98be65","--high","#ff6c6b"] 10
                     , Run Memory ["-t","<fn=1> </fn> Memory: (<usedratio>%)"] 10
                     , Run Com "uname" ["-s","-r"] "" 3600
@@ -24,5 +23,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=haskell_20.xpm/> <fc=#5b6268>|</fc>%UnsafeStdinReader% }{ <fc=#4db5bd><fn=1> </fn> %spotsong% </fc> <fc=#5b6268>|</fc> <fc=#ff6c6b><fn=1> </fn> %uname% </fc> <fc=#5b6268>|</fc> <fc=#98be65> %cpu% </fc> <fc=#5b6268>|</fc> <fc=#2257b0> %memory% </fc> <fc=#5b6268>|</fc> <fc=#c678dd> %wlan0% </fc> <fc=#5b6268>|</fc> <fc=#46d9ff> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#5b6268>|</fc> <fc=#ebbe7b>%date%</fc> <fc=#5b6268>|</fc> <fc=#da8548>%time%</fc> <fc=#5b6268>|</fc> %trayerpad%"
+       , template = " <icon=haskell_20.xpm/> <fc=#5b6268>|</fc>%UnsafeStdinReader% }{ <fc=#4db5bd><fn=1> </fn> %spotsong% </fc> <fc=#5b6268>|</fc> <fc=#ff6c6b><fn=1> </fn> %uname% </fc> <fc=#5b6268>|</fc> <fc=#98be65> %cpu% </fc> <fc=#5b6268>|</fc> <fc=#2257b0> %memory% </fc> <fc=#5b6268>|</fc> <fc=#46d9ff> <fn=1>ﮮ </fn> %pacupdate% </fc> <fc=#5b6268>|</fc> <fc=#ebbe7b>%date%</fc> <fc=#5b6268>|</fc> <fc=#da8548>%time%</fc> <fc=#5b6268>|</fc> %trayerpad%"
        }

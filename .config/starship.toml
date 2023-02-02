@@ -88,6 +88,10 @@ disabled = true
 format = "via [Rust $symbol($version)]($style) "
 symbol = " "
 
+[dart]
+format = "via [Dart $symbol($version)]($style) "
+symbol = " "
+
 [shell]
 disabled = false
 bash_indicator = "[](3)"

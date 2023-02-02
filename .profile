@@ -23,6 +23,8 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc # ~/.python_history
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup # ~/.rustup
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export STACK_ROOT="$XDG_DATA_HOME"/stack
+export ANDROID_HOME="$HOME/Programming/SDKs/Android"
+export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/22.1.7171670"
 
 # PATH
-export PATH="$HOME"/.ghcup/bin/:"$HOME"/Qt/Tools/QtCreator/bin/:"$HOME"/android-platform-tools:"$CARGO_HOME"/bin/:"$XDG_CONFIG_HOME"/emacs/bin:"$HOME"/.local/bin:"$HOME"/Programming/SDKs/flutter/bin:"$HOME"/MultiMC/bin:"$HOME"/Applications:"$XDG_DATA_HOME"/applications/wine/Programs/:$PATH
+export PATH="$HOME"/.nix-profile/bin:/nix/var/nix/profiles/default/bin:"$HOME"/Qt/Tools/QtCreator/bin/:"$CARGO_HOME"/bin/:"$XDG_CONFIG_HOME"/emacs/bin:"$HOME"/.local/bin:"$HOME"/MultiMC/bin:"$HOME"/Applications:"$XDG_DATA_HOME"/applications/wine/Programs/:"$ANDROID_HOME"/cmdline-tools/latest/bin/:"$ANDROID_HOME"/platform-tools/:"$ANDROID_HOME"/emulator/:"$ANDROID_NDK_HOME"/toolchains/llvm/prebuilt/linux-x86_64/bin/:"$PATH"

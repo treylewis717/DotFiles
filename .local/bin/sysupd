@@ -15,7 +15,7 @@ echo "--- End Rust ---"
 
 echo ""
 echo "--- Flatpak ---"
-flatpak update --noninteractive
+flatpak update -y
 echo "--- End Flatpak ---"
 
 #echo ""

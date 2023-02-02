@@ -97,7 +97,6 @@ myWorkspaces :: [[Char]]
 myWorkspaces =
   [ " Main "
   , " Background "
-  , " System "
   , " Gaming "
   , " Crypto "
   , " Extra "
@@ -138,12 +137,14 @@ myKeys =
   , ("M-S-c"                 , kill1)
          -- start editor --
   , ("M-S-e e"               , spawn myEditor)
-         -- start emacs everywhere
+         -- start emacs everywhere --
   , ("M-e", spawn "emacsclient --eval '(emacs-everywhere)'")
          -- start mu4e --
   , ("M-S-e m"               , spawn "emacsclient --eval '(mu4e)'")
          -- start dired --
   , ("M-S-e d", spawn "emacsclient --eval '(dired nil)'")
+         -- start android-studio --
+  , ("M-S-e a", spawn "android-studio")
          -- close all windows in focused workspace --
   , ("M-S-a"                 , killAll)
          -- change to next layout --
@@ -237,11 +238,11 @@ myManageHook = composeAll
   , className =? "discord" --> doShift (myWorkspaces !! 1)
   , className =? "spot" --> doShift (myWorkspaces !! 1)
   , className =? "qbittorrent" --> doShift (myWorkspaces !! 2)
-  , className =? "Steam" --> doShift (myWorkspaces !! 3)
-  , className =? "heroic" --> doShift (myWorkspaces !! 3)
-  , className =? "ProtonUp-Qt" --> doShift (myWorkspaces !! 3)
-  , title =? "Monero" --> doShift (myWorkspaces !! 4)
-  , className =? "bisq.desktop.app.BisqApp" --> doShift (myWorkspaces !! 4)
+  , className =? "Steam" --> doShift (myWorkspaces !! 2)
+  , className =? "heroic" --> doShift (myWorkspaces !! 2)
+  , className =? "ProtonUp-Qt" --> doShift (myWorkspaces !! 2)
+  , title =? "Monero" --> doShift (myWorkspaces !! 3)
+  , className =? "bisq.desktop.app.BisqApp" --> doShift (myWorkspaces !! 3)
   , resource =? "desktop_window" --> doIgnore
   ]
 
@@ -274,7 +275,7 @@ myStartupHook = do
   spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
   spawnOnce "discord &"
   spawnOnce "spotify &"
-  spawnOnce "emacs --daemon &"
+--  spawnOnce "emacs --daemon &"
   spawnOnce "flameshot &"
   spawnOnce "steam &"
   spawnOnce "nitrogen --restore &"

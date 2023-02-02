@@ -1,3 +1,8 @@
+(load "~/.config/doom/calendar")
+
+(setq user-full-name "Trey Lewis"
+      user-mail-address "treylewis717@tutanota.com")
+
 (evil-define-key 'normal dired-mode-map
   (kbd "h") 'dired-up-directory
   (kbd "l") 'dired-open-file)
@@ -5,7 +10,6 @@
   (kbd "j") 'peep-dired-next-file
   (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (setq dired-open-extensions '(("gif" . "sxiv")
                               ("jpg" . "sxiv")
                               ("png" . "sxiv")

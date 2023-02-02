@@ -1,6 +1,19 @@
 #+TITLE: TL Doom Emacs Config
 #+PROPERTY: header-args :tangle config.el
 
+* Calendar
+** GCal Syncing
+#+begin_src emacs-lisp
+(load "~/.config/doom/calendar")
+#+end_src
+
+* Doom
+** Identification
+#+begin_src emacs-lisp
+(setq user-full-name "Trey Lewis"
+      user-mail-address "treylewis717@tutanota.com")
+#+end_src
+
 * Dired
 Some options for the built-in file manager.
 
@@ -12,7 +25,6 @@ Some options for the built-in file manager.
   (kbd "j") 'peep-dired-next-file
   (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (setq dired-open-extensions '(("gif" . "sxiv")
                               ("jpg" . "sxiv")
                               ("png" . "sxiv")

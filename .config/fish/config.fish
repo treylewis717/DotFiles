@@ -12,9 +12,6 @@ set EDITOR "nvim"
 # Zoxide will echo the matched dir before navigating
 set -gx _ZO_ECHO 1
 
-# More verbose Rust backtrace
-set -gx RUST_BACKTRACE 1
-
 # Sets my chrome executable
 set -gx CHROME_EXECUTABLE "/usr/bin/google-chrome-stable"
 
@@ -39,7 +36,7 @@ alias vim="nvim"
 alias find="fd"
 
 # git dotfiles
-alias dfgit='/usr/bin/git --git-dir=/mnt/Projects/Git/DotFiles/ --work-tree=$HOME'
+alias dfgit='/usr/bin/git --git-dir=/home/trey/Projects/Git/DotFiles/ --work-tree=$HOME'
 alias dfpush='dfgit push'
 
 # grep
