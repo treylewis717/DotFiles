@@ -277,10 +277,12 @@ myStartupHook = do
   spawnOnce "spotify &"
 --  spawnOnce "emacs --daemon &"
   spawnOnce "flameshot &"
+  spawnOnce "barrier --config /home/trey/barrier/barrier.conf"
   spawnOnce "steam &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "dunst -config ~/.config/dunst/dunstrc &"
   spawnOnce "heroic &"
+  spawnOnce "kdeconnect-indicator &"
   spawnOnce "net.davidotek.pupgui2 &"
   spawnOnce "qbittorent &"
   spawnOnce "flatpak run org.getmonero.Monero &"
@@ -324,7 +326,6 @@ main = do
                                       , ppTitle = xmobarColor "#dfdfdf" "" . shorten 60
                                       , ppSep = "<fc=#5b6268> <fn=1>|</fn> </fc>"
                                       , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"
-                                      , ppExtras = [windowCount]
                                       , ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
                                       }
                         }
