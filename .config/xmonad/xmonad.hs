@@ -230,10 +230,10 @@ myLayoutHook =
 myManageHook :: Query (Endo WindowSet)
 myManageHook =
   composeAll $
-    [ className =? "pyrogenesis" --> doFloat,
-      className =? "Proton Mail Bridge" --> doFloat,
+    [ hasNetWMState "_NET_WM_STATE_ABOVE" --> doFloat,
       className =? "discord" --> doShift (myWorkspaces !! 1),
       className =? "spot" --> doShift (myWorkspaces !! 1),
+      title =? "Spotify" --> doShift (myWorkspaces !! 1),
       className =? "qbittorrent" --> doShift (myWorkspaces !! 2),
       className =? "Steam" --> doShift (myWorkspaces !! 2),
       className =? "heroic" --> doShift (myWorkspaces !! 2),
@@ -257,15 +257,9 @@ myManageHook =
 
 -- Event Handling --
 
-spotifyEventHook :: Event -> X All
-spotifyEventHook =
-  dynamicPropertyChange
-    "WM_NAME"
-    (className =? "Spotify" --> doShift (myWorkspaces !! 1))
-
 myEventHook :: Event -> X All
 myEventHook =
-  handleEventHook def <+> spotifyEventHook
+  handleEventHook def
     <+> swallowEventHook
       (className =? "Alacritty")
       (return True)
@@ -285,7 +279,7 @@ myStartupHook = do
   spawnOnce "blueman-applet &"
   spawnOnce "volumeicon &"
   spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-  spawnOnce "discord &"
+  spawnOnce "flatpak run com.discordapp.Discord &"
   spawnOnce "spotify &"
   --  spawnOnce "emacs --daemon &"
   spawnOnce "flameshot &"
@@ -296,7 +290,6 @@ myStartupHook = do
   spawnOnce "heroic &"
   spawnOnce "kdeconnect-indicator &"
   spawnOnce "net.davidotek.pupgui2 &"
-  spawnOnce "qbittorent &"
   spawnOnce "flatpak run org.getmonero.Monero &"
   setWMName "LG3D"
 

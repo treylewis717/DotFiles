@@ -95,7 +95,7 @@ symbol = " "
 [shell]
 disabled = false
 bash_indicator = "[](3)"
-fish_indicator = "[](3)"
+fish_indicator = "[󰈺](3)"
 
 [directory]
 truncate_to_repo = false
